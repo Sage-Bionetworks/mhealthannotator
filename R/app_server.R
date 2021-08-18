@@ -122,7 +122,7 @@ app_server <- function( input, output, session ) {
         }
         
         # batch process filehandles
-        values$useDf <- get_batch(
+        values$useDf <- get_annotation_batch(
           syn = syn,
           all_data = values$allDf,
           curated_data = values$curatedDf,
@@ -258,112 +258,81 @@ app_server <- function( input, output, session ) {
   # render go forward button
   ##################################
   observeEvent(input$goNext, {
-    if("" %in% values$userInput){
-      sendSweetAlert(
-        session,
-        title = "Oops!",
-        text = "Please finish all the survey questions before moving to the next one",
-        type = "error",
-        btn_labels = "Ok",
-        btn_colors = "#3085d6",
-        html = FALSE,
-        closeOnClickOutside = TRUE,
-        showCloseButton = FALSE,
-        width = NULL
+    # store survey input 
+    values$useDf <- values$useDf %>%
+      store_inputs(
+        curr_index = values$ii, 
+        user_inputs = values$userInput,
+        keep_metadata = synapse_config$keep_metadata,
+        uid = synapse_config$uid
       )
-    }else{
-      # store survey input 
-      values$useDf <- values$useDf %>%
-        store_inputs(
-          curr_index = values$ii, 
-          user_inputs = values$userInput,
-          keep_metadata = synapse_config$keep_metadata,
-          uid = synapse_config$uid
-        )
-      
-      # call module to render image
-      callModule(mod_render_image_server, 
-                 "render_image_ui",
-                 obj_path = values$useDf$imagePath[values$ii],
-                 input_width = image_config$width,
-                 input_height = image_config$height)
-      
-      total_curated <- (values$useDf %>% tidyr::drop_na() %>% nrow(.))
-      if((total_curated == nrow(values$useDf)) & !values$postConfirm){
-        ask_confirmation(
-          inputId = "confirmation",
-          title = "Thank You!! \n You have finished this session!",
-          btn_labels = c("Review before saving", "Save to Synapse"),
-          btn_colors = c("#FE642E", "#04B404"),
-          type = "success")
-        values$postConfirm <- TRUE
-      }
-      
-      if(values$ii == values$useDf %>% nrow(.)){
-        tmpI <- 1
-      } else{
-        tmpI <- values$ii + 1
-      }
-      values$ii <- tmpI
-      values <- update_inputs(
-        reactive_values = values,
-        session = session, 
-        curr_index = values$ii,
-        config = config$survey_opts)
-      
+    
+    # call module to render image
+    callModule(mod_render_image_server, 
+               "render_image_ui",
+               obj_path = values$useDf$imagePath[values$ii],
+               input_width = image_config$width,
+               input_height = image_config$height)
+    
+    total_curated <- (values$useDf %>% tidyr::drop_na() %>% nrow(.))
+    if((total_curated == nrow(values$useDf)) & !values$postConfirm){
+      ask_confirmation(
+        inputId = "confirmation",
+        title = "Thank You!! \n You have finished this session!",
+        btn_labels = c("Review before saving", "Save to Synapse"),
+        btn_colors = c("#FE642E", "#04B404"),
+        type = "success")
+      values$postConfirm <- TRUE
     }
+    
+    if(values$ii == values$useDf %>% nrow(.)){
+      tmpI <- 1
+    } else{
+      tmpI <- values$ii + 1
+    }
+    values$ii <- tmpI
+    values <- update_inputs(
+      reactive_values = values,
+      session = session, 
+      curr_index = values$ii,
+      config = config$survey_opts)
   })
 
   #################
   # render go back button
   ##################
   observeEvent(input$goPrev, {
-    if("" %in% values$userInput){
-      sendSweetAlert(
-        session,
-        title = "Oops!",
-        text = "Please finish all the survey questions before moving to the next one",
-        type = "error",
-        btn_labels = "Ok",
-        btn_colors = "#3085d6",
-        html = FALSE,
-        closeOnClickOutside = TRUE,
-        showCloseButton = FALSE,
-        width = NULL
-      )
-    }else{
-      values$useDf <- values$useDf %>%
-        store_inputs(curr_index = values$ii, 
-                           user_inputs = values$userInput,
-                           keep_metadata = synapse_config$keep_metadata,
-                           uid = synapse_config$uid)
-      callModule(mod_render_image_server, 
-                 "render_image_ui",
-                 obj_path = values$useDf$imagePath[values$ii],
-                 input_width = image_config$width,
-                 input_height = image_config$height)
-      total_curated <- (values$useDf %>% tidyr::drop_na() %>% nrow(.))
-      if((total_curated == nrow(values$useDf)) & !values$postConfirm){
-        ask_confirmation(
-          inputId = "confirmation",
-          title = "Thank You!! \n You have finished your annotation!",
-          btn_labels = c("Review before saving", "Save to Synapse"),
-          btn_colors = c("#FE642E", "#04B404"),
-          type = "success")
-        values$postConfirm <- TRUE
-      }
-      if(values$ii > 1){
-        tmpI <- values$ii - 1
-      }else{
-        tmpI <- values$useDf %>% nrow(.)
-      }
-      values$ii <- tmpI
-      values <- update_inputs(
-        reactive_values = values,
-        session = session, 
-        curr_index = values$ii,
-        config = config$survey_opts)
+    values$useDf <- values$useDf %>%
+      store_inputs(curr_index = values$ii, 
+                         user_inputs = values$userInput,
+                         keep_metadata = synapse_config$keep_metadata,
+                         uid = synapse_config$uid)
+    callModule(mod_render_image_server, 
+               "render_image_ui",
+               obj_path = values$useDf$imagePath[values$ii],
+               input_width = image_config$width,
+               input_height = image_config$height)
+    total_curated <- (values$useDf %>% tidyr::drop_na() %>% nrow(.))
+    if((total_curated == nrow(values$useDf)) & !values$postConfirm){
+      ask_confirmation(
+        inputId = "confirmation",
+        title = "Thank You!! \n You have finished your annotation!",
+        btn_labels = c("Review before saving", "Save to Synapse"),
+        btn_colors = c("#FE642E", "#04B404"),
+        type = "success")
+      values$postConfirm <- TRUE
     }
+    if(values$ii > 1){
+      tmpI <- values$ii - 1
+    }else{
+      tmpI <- values$useDf %>% nrow(.)
+    }
+    values$ii <- tmpI
+    values <- update_inputs(
+      reactive_values = values,
+      session = session, 
+      curr_index = values$ii,
+      config = config$survey_opts)
   })
   
   ##################################
@@ -443,7 +412,7 @@ app_server <- function( input, output, session ) {
       shinyjs::refresh()
     }else{
       # batch process filehandles
-      values$useDf <- get_batch(
+      values$useDf <- get_annotation_batch(
         syn = syn,
         all_data = values$allDf,
         curated_data = values$curatedDf,

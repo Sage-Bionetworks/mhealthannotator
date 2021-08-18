@@ -2,7 +2,7 @@
 
 export(app_ui)
 export(attempt_login)
-export(get_batch)
+export(get_annotation_batch)
 export(get_source_table)
 export(get_stored_annotation)
 export(mod_render_image_server)

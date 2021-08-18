@@ -53,9 +53,7 @@ mod_survey_input_user_ui <- function(id){
           sliderTextInput(
             ns(colname),
             h4(prompt), 
-            selected = "None Selected",
             choices = c(
-              "None Selected",
               seq(x$input_choices$min, 
                   x$input_choices$max, 
                   x$input_choices$step)),
