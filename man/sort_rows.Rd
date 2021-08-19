@@ -7,6 +7,8 @@
 sort_rows(data, sort_keys)
 }
 \arguments{
+\item{data}{the data to sort on}
+
 \item{sort_keys}{the keys to sort based off}
 }
 \value{

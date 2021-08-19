@@ -3,6 +3,9 @@
 #' @description get unannotated rows by anti-joining
 #' fetched data with previously curated data
 #' 
+#' @importFrom magrittr `%>%`
+#' 
+#' @param data data
 #' @param curated_data curated data stored in synapse
 #' @param uid unique identifier to compare whether image
 #' has been annotated or not

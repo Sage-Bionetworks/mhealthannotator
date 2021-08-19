@@ -7,6 +7,8 @@
 get_new_rows(data, curated_data, uid)
 }
 \arguments{
+\item{data}{data}
+
 \item{curated_data}{curated data stored in synapse}
 
 \item{uid}{unique identifier to compare whether image

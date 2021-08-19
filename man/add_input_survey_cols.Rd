@@ -7,6 +7,8 @@
 add_input_survey_cols(data, survey_colnames)
 }
 \arguments{
+\item{data}{the data to add input survey cols}
+
 \item{survey_colnames}{the survey columns that will be stored}
 }
 \value{
