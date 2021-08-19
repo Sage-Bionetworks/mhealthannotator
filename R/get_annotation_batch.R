@@ -20,8 +20,10 @@ get_new_rows <- function(data, curated_data, uid){
 #' 
 #' @description sort dataframe rows for annotations
 #' based on the keys provided
-#' 
+#'
+#' @param data the data to sort on 
 #' @param sort_keys the keys to sort based off
+#' 
 #' @return sorted dataframe/tibble
 sort_rows <- function(data, sort_keys){
   # sort option 
@@ -43,7 +45,9 @@ sort_rows <- function(data, sort_keys){
 #' and its corresponding filepath, and empty timestamps
 #' to fill out in shiny session
 #' 
+#' @param data the data to add input survey cols
 #' @param survey_colnames the survey columns that will be stored
+#' 
 #' @return dataframe/tibble with survey columns
 add_input_survey_cols <- function(data, survey_colnames){
   data %>%

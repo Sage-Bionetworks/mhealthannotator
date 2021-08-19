@@ -1,8 +1,9 @@
 # mhealthannotator
-Mhealthannotator is a RShiny-as-a-service App for visualizing Files in Synapse Tables used @Sage Bionetworks. 
 
-## About
-This app's purpose is to help researchers/engineers/analyst be able to spin up <b> Image Label Annotations </b> App more seamlessly through using RShiny as its core UI/UX.
+## About:
+Mhealthannotator is an RShiny Golem Package utilized for annotating labels on PHI images/visualization from Files in attached in Synapse Tables. The purpose of this package is to enable researchers to easily deploy their customized RShiny App, and have it all integrated seamlessly into Synapse for PHI data access. 
+
+## Use-case:
 
 It will help interact with Synapse by providing: 
 
