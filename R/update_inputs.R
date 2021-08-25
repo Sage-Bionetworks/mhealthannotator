@@ -47,16 +47,17 @@ parse_slider_value <- function(row_input, selected){
 #' @param curr_index access current index
 #' @param config access annotator config file
 #' @return updated dataframe with input
-update_inputs <- function(reactive_values,
-                           session, 
-                           curr_index,
-                           config){
-    select_view_ns <- NS("survey_input_ui")
+update_inputs <- function(id,
+                          values,
+                          session, 
+                          curr_index,
+                          config){
+    select_view_ns <- NS(id)
     purrr::walk(config, function(survey){
         selected <- survey$selected
         colname <- survey$colname
         type <- survey$type
-        row_input <- reactive_values$useDf[[colname]][curr_index]
+        row_input <- values$annotation_data[[colname]][curr_index]
         if(type == "radio"){
             updateRadioGroupButtons(session, 
                                     select_view_ns(colname), 
@@ -79,5 +80,5 @@ update_inputs <- function(reactive_values,
                                            row_input, selected = selected))
         }
     })
-    return(reactive_values)
+    return(values)
 }

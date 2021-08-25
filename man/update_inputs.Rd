@@ -6,16 +6,16 @@
 maintaining previously selected buttons and/or
 updating it with new ones}
 \usage{
-update_inputs(reactive_values, session, curr_index, config)
+update_inputs(id, values, session, curr_index, config)
 }
 \arguments{
-\item{reactive_values}{access reactive values}
-
 \item{session}{access shiny session}
 
 \item{curr_index}{access current index}
 
 \item{config}{access annotator config file}
+
+\item{reactive_values}{access reactive values}
 }
 \value{
 updated dataframe with input
