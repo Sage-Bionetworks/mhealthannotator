@@ -156,8 +156,8 @@ psorcast_nail:
                 type: "radio"
                 prompt: "Does this nail has Psoriasis:"
                 input_choices:
-                    Yes: "0"
-                    No: "1"
+                    Yes: 'TRUE'
+                    No: 'FALSE'
                     Can't Tell: "Can't Tell"
 
 # psorcast hand omaging configuration
