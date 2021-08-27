@@ -131,6 +131,34 @@ psorcast_plaque:
                 3: 3
                 4: 4
                 Can't Tell: "Can't Tell"
+                
+# psorcast nail
+psorcast_nail:
+    synapse_opts:
+        output_parent_id: 
+            - "syn25614357"
+        synapse_tbl_id: 
+            - "syn26050060" 
+        output_filename: 
+            - "nail_psoriasis_annotations.tsv"
+        filehandle_cols:
+            - "finger_segments"
+        uid: 
+            - "recordId" # unique identifier for that file in synapse table
+            - "finger_key"
+        n_batch: 50
+        keep_metadata:
+            - "participantId"
+            - "createdOn"
+    survey_opts:
+        survey_1:
+                colname: "nail_pso_status"
+                type: "radio"
+                prompt: "Detected Nail Psoriasis:"
+                input_choices:
+                    Yes: 'TRUE'
+                    No: 'FALSE'
+                    Can't Tell: "Can't Tell"
 
 # psorcast hand omaging configuration
 psorcast_hand_imaging:

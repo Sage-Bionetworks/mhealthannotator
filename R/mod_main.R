@@ -412,7 +412,7 @@ mod_main_server <- function(id, syn) {
                 )
 
                 # save to synapse
-                store_to_synapse(
+                syn_id <- store_to_synapse(
                     syn = syn,
                     synapseclient = synapseclient,
                     parent_id = synapse_config$output_parent_id,
@@ -492,12 +492,15 @@ mod_main_server <- function(id, syn) {
                     # remove when done
                     Sys.sleep(2)
                     shinybusy::remove_modal_spinner()
-
+                    
+                    # create text response for saving
+                    response <- glue::glue("Your saved annotation: {syn_id}")
+                    
                     # send sweet alert
                     sendSweetAlert(
                         session = session,
                         title = "Session is updated!",
-                        text = "We saved your previous session annotations to Synapse.",
+                        text = response,
                         type = "success"
                     )
                 }
