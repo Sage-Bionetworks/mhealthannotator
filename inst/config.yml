@@ -138,7 +138,7 @@ psorcast_nail:
         output_parent_id: 
             - "syn25614357"
         synapse_tbl_id: 
-            - "syn22276946" 
+            - "syn26050060" 
         output_filename: 
             - "nail_psoriasis_annotations.tsv"
         filehandle_cols:
