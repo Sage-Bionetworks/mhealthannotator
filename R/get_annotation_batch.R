@@ -127,7 +127,7 @@ get_session_images <- function(data,
   # get synapse table entity
   entity <- syn$tableQuery(
     glue::glue(
-      "SELECT * FROM {synapse_tbl_id} WHERE {get_subset}"))
+      "SELECT * FROM {synapse_tbl_id} WHERE {get_subset} LIMIT {n_batch}"))
   
   # download all table columns
   syn$downloadTableColumns(
