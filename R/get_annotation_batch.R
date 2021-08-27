@@ -73,11 +73,24 @@ add_input_survey_cols <- function(data, survey_colnames){
 #' @param uid unique identifier used to 
 #' @return a string of unique identifier that will
 #' be included in the batch with parentheses 
-get_table_string_filters <- function(uid){
-  uid %>% 
-    purrr::map_chr(., function(x){glue::glue("'", x, "'")}) %>%
-    paste0(., collapse = ",") %>%
-    glue::glue("(", ., ")")
+#' @title Get Table Unique Identifier String Filter
+#' 
+#' @description This is a helper function to build string filter (SQL-like)
+#' for filtering Synapse Table before downloading files 
+#' Note: This is done to enable small-batch download
+#' 
+#' @param uid unique identifier used to 
+#' @return a string of unique identifier that will
+#' be included in the batch with parentheses 
+get_table_string_filters <- function(data, uid){
+  purrr::map(uid, function(identifier){
+    string_sep <- data[[identifier]] %>% 
+      purrr::map_chr(~glue::glue("'", .x, "'")) %>%
+      glue::glue_collapse(sep = ",")
+    query_string <- 
+      glue::glue("{identifier} IN ({string_sep})") 
+    return(query_string)}) %>% 
+    purrr::reduce(paste, sep = " AND ")
 }
 
 
@@ -109,14 +122,12 @@ get_session_images <- function(data,
   
   # get sql string statement for filtering data in synapse table
   get_subset <- data %>%
-    dplyr::slice(1:n_batch) %>%
-    .[[uid]] %>% 
-    get_table_string_filters()
+    get_table_string_filters(uid = uid)
   
   # get synapse table entity
   entity <- syn$tableQuery(
     glue::glue(
-      "SELECT * FROM {synapse_tbl_id} WHERE recordId IN {get_subset}"))
+      "SELECT * FROM {synapse_tbl_id} WHERE {get_subset}"))
   
   # download all table columns
   syn$downloadTableColumns(
