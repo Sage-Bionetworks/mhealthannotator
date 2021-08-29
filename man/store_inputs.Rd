@@ -4,7 +4,7 @@
 \alias{store_inputs}
 \title{Function to store survey inputs from shiny app}
 \usage{
-store_inputs(data, curr_index, user_inputs, keep_metadata, uid)
+store_inputs(data, curr_index, user_inputs, uid, keep_metadata = NULL)
 }
 \arguments{
 \item{data}{data of annotations}
@@ -13,9 +13,9 @@ store_inputs(data, curr_index, user_inputs, keep_metadata, uid)
 
 \item{user_inputs}{input given by users}
 
-\item{keep_metadata}{what metadata to keep}
-
 \item{uid}{what are the unique ids (recordId, healthcode, participantId etc.)}
+
+\item{keep_metadata}{what metadata to keep}
 }
 \value{
 dataframe of annotation based on current index

@@ -16,6 +16,8 @@ app_server <- function( input, output, session ) {
   syn <- synapseclient$Synapse()
   if(interactive()){
     attempt_login(syn)
+  }else{
+   # use oauth 
   }
   mod_main_server("main", syn = syn) 
 }
