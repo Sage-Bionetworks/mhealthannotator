@@ -28,6 +28,7 @@ store_to_synapse <- function(syn,
     file <- synapseclient$File(
         output_filename, 
         parentId = parent_id)
-    syn$store(file, activity = synapseclient$Activity(...))
+    file <- syn$store(file, activity = synapseclient$Activity(...))
     unlink(output_filename)
+    return(file$properties$id)
 }
