@@ -48,6 +48,5 @@ dir/*
 dev/*
 inst/doc
 doc
-Meta
-/doc/
+Metas
 /Meta/

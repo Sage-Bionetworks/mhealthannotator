@@ -2,7 +2,7 @@
 title: "Building Configuration Schema"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{build_config_schema}
+  %\VignetteIndexEntry{Building Configuration Schema}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
