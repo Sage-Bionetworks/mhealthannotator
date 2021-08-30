@@ -1,4 +1,4 @@
-#' @title mpower gait visualization entry-point
+#' @title function for mpower V2 sensor visualization
 #' 
 #' @description this function is used to visualize a 
 #' filepath for gait data in Synapse table
@@ -109,6 +109,20 @@ visualize_mpower_gait <- function(filepath){
     return(output_filename)
 }
 
+#' @title function for mpower V1 sensor visualization
+#' 
+#' @description this function is used to visualize a 
+#' filepath for gait data in Synapse table
+#' 
+#' @import ggplot2
+#' @import patchwork
+#' @importFrom magrittr "%>%"
+#' 
+#' @export
+#' 
+#' @param filepath the corresponding filepath being used
+#' 
+#' @return the output filepath for the visualization
 visualize_device_motion <- function(filepath){
     shape_sensor_data <- function(filepath){
         ts <- filepath %>%
