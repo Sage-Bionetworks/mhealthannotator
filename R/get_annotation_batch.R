@@ -32,7 +32,8 @@ sort_rows <- function(data, sort_keys){
   # sort option 
   if(!is.null(sort_keys)){
     if(sort_keys == "random"){
-      data <- data %>% sample_n(size = nrow(.))
+      data <- data %>% 
+        dplyr::sample_n(size = nrow(.))
     }else{
       data <- data %>%
         dplyr::arrange(!!sym(sort_keys))
