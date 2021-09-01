@@ -21,7 +21,7 @@ authorization_url <- NULL
     synapseutils <<- reticulate::import("synapseutils", delay_load = TRUE)
     if (!interactive()) {
         setup_global_oauth_vars(
-            app_url = 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth',
+            app_url = 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/',
             client_name = Sys.getenv("client_name"),
             client_id = Sys.getenv("client_id"),
             client_secret = Sys.getenv("client_secret")
