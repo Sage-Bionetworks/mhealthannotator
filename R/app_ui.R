@@ -10,7 +10,12 @@
 #' shinyApp(ui = app_ui, server = app_server)
 #' }
 app_ui <- function(request) {
-  mod_main_ui("main")
+  if (interactive()) {
+    ## Running locally; skip OAuth
+    mod_main_ui("main")
+  } else {
+    mod_synapse_oauth_ui(id = "oauth", request = request)
+  }
 }
 
 #' Add external Resources to the Application
