@@ -17,7 +17,8 @@ authorization_url <- NULL
 #' @param libname default R .onLoad() parameter
 #' @param pkgname default R .onLoad() parameter
 .onLoad <- function(libname, pkgname) {
-    synapse <<- reticulate::import("synapseclient", delay_load = TRUE)
+    synapseclient <<- reticulate::import("synapseclient", delay_load = TRUE)
+    synapseutils <<- reticulate::import("synapseutils", delay_load = TRUE)
     if (!interactive()) {
         setup_global_oauth_vars(
             app_url = config::get(app_url),
