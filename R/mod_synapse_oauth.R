@@ -1,5 +1,5 @@
 ## Global Synapse module
-synapse <- NULL
+synapseclient <- NULL
 app <- NULL
 api <- NULL
 scope <- NULL
