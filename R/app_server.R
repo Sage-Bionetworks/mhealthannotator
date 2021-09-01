@@ -18,6 +18,10 @@ app_server <- function( input, output, session ) {
     attempt_login(syn)
   }else{
    # use oauth 
+    syn <- mod_synapse_oauth_server(
+      id = "oauth",
+      syn = syn
+    )
   }
   mod_main_server("main", syn = syn) 
 }
