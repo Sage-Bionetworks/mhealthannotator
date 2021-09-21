@@ -7,6 +7,7 @@ default:
 
 # all buttons and used for testing purposes
 testing:
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
     synapse_opts:
         output_parent_id: 
             - "syn25614357"
@@ -136,7 +137,7 @@ psorcast_plaque:
 psorcast_nail:
     synapse_opts:
         output_parent_id: 
-            - "syn25614357"
+            - "syn26133849"
         synapse_tbl_id: 
             - "syn26050060" 
         output_filename: 
@@ -146,7 +147,7 @@ psorcast_nail:
         uid: 
             - "recordId" # unique identifier for that file in synapse table
             - "finger_key"
-        n_batch: 50
+        n_batch: 5
         keep_metadata:
             - "participantId"
             - "createdOn"
@@ -256,14 +257,14 @@ mpower_gait_checks:
         output_parent_id: 
             - "syn24986703"
         synapse_tbl_id: 
-            - "syn25981806"
+            - "syn26064128"
         output_filename: 
             - "mpower_v1_checks_gait_annotations.tsv"
         filehandle_cols:
             - "deviceMotion_walking_outbound.json.items"
         uid: 
             - "recordId"
-        n_batch: 50
+        n_batch: 5
         keep_metadata:
             - "healthCode"
             - "createdOn"

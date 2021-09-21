@@ -241,6 +241,9 @@ mod_main_server <- function(id, syn) {
                 annotation_data = annotation_data,
                 post_confirm = FALSE)
             
+            print(curated_data)
+            print(annotation_data)
+            
             #######################
             # render user box
             #######################
@@ -331,7 +334,6 @@ mod_main_server <- function(id, syn) {
                 if(values$index == values$annotation_data %>% nrow(.)){
                     tmpI <- 1
                 } else{
-                    print("here")
                     tmpI <- values$index + 1
                 }
                 values$index <- tmpI
@@ -410,6 +412,7 @@ mod_main_server <- function(id, syn) {
                         h3("Please Wait..."),
                         h4("We are uploading your data to Synapse."))
                 )
+                
 
                 # save to synapse
                 syn_id <- store_to_synapse(
@@ -522,6 +525,10 @@ mod_main_server <- function(id, syn) {
                         searching = FALSE,
                         scrollX = TRUE,
                         lengthChange= FALSE))
+            })
+            
+            observe({
+                print(values$new_data)
             })
         }
     )
