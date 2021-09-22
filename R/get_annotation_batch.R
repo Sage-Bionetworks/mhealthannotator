@@ -215,7 +215,7 @@ get_annotation_batch <- function(syn,
     sort_rows(sort_keys = sort_keys) %>%
     get_session_images(
       syn = syn,
-      uid = uid,
+      uid = "recordId",
       synapse_tbl_id = synapse_tbl_id,
       filehandle_cols = filehandle_cols,
       keep_metadata = keep_metadata,
