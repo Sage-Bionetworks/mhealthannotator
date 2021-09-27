@@ -23,6 +23,8 @@ app_server <- function( input, output, session ) {
       syn = syn
     )
   }
-  shiny::req(inherits(syn, "synapseclient.client.Synapse"), logged_in(syn))
+  shiny::req(
+    inherits(syn, "synapseclient.client.Synapse"), 
+    logged_in(syn))
   mod_main_server("main", syn = syn) 
 }

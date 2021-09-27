@@ -134,115 +134,124 @@ mod_main_server <- function(id, syn) {
         function(input, 
                  output, 
                  session){
-            shiny::req(inherits(
-                syn, 
-                "synapseclient.client.Synapse") & 
-                    logged_in(syn))
             
-            # read configuraiton file
-            config_path <- 
-                file.path(golem::get_golem_options("config"))
-            config <- config::get(file = config_path)
-            
-            #' check config
-            check_survey_config(config$survey_opts)
-            check_synapse_config(config$synapse_opts)
-            
-            # gett all parameter
-            synapse_config <- config$synapse_opts
-            survey_config <- parse_survey_opts(config$survey_opts)
-            image_config <- config$image_opts
-            visualization_funs <- golem::get_golem_options("funs")
-            synapse_profile <- syn$getUserProfile()$userName
-            cache_location <- file.path(
-                "dir", synapse_profile, "downloaded_files")
-            output_location <- file.path(
-                "dir", synapse_profile, "processed_files")
-            output_filename <- glue::glue(
-                "{annotator}_{filename}",
-                filename = synapse_config$output_filename,
-                annotator = synapse_profile)
-            
-            # create log directory
-            dir.create("log", showWarnings = FALSE)
-            dir.create("dir", showWarnings = FALSE) 
-            
-            # create user directory
-            clear_user_directory(synapse_profile)
-            create_user_directory(synapse_profile)
-            
-            #' get all data and previous data
-            all_data <- get_source_table(
-                syn = syn, 
-                filehandle_cols = synapse_config$filehandle_cols,
-                synapse_tbl_id = synapse_config$synapse_tbl_id)
-            
-            #' get previous image that has been curated
-            curated_data <- get_stored_annotation(
-                syn = syn,
-                parent_id = synapse_config$output_parent_id,
-                stored_filename = output_filename,
-                uid = synapse_config$uid,
-                keep_metadata = synapse_config$keep_metadata,
-                survey_colnames = survey_config$survey_colnames
-            )
-            
-            # return feedback message if all images are annotated
-            if(nrow(curated_data) == nrow(all_data)){
+            # check certification
+            if(!check_certified_user(syn)){
                 waiter_update(
                     html = tagList(
-                        img(src = "www/synapse_logo.png", height = "120px"),
-                        h2("Thank you, you have finished your annotations"),
-                        h3("Come back next time!")
+                        img(src = "www/synapse_logo.png", 
+                            height = "120px"),
+                        h3("You must become Certified Synapse User to proceed:"),
+                        tags$a(
+                            href = "https://www.synapse.org/#!Quiz:Certification",
+                            "Link to Certification")
                     )
                 )
                 return("")
             }else{
-                # update waiter loading screen once login successful
-                waiter::waiter_update(
-                    html = tagList(
-                        img(src = "www/loading.gif"),
-                        h4(sprintf("Retrieving Images from Synapse..."))))
+                # read configuraiton file
+                config_path <- 
+                    file.path(golem::get_golem_options("config"))
+                config <- config::get(file = config_path)
                 
-                # batch process image filehandles
-                annotation_data <- get_annotation_batch(
+                #' check config
+                check_survey_config(config$survey_opts)
+                check_synapse_config(config$synapse_opts)
+                
+                # gett all parameter
+                synapse_config <- config$synapse_opts
+                survey_config <- parse_survey_opts(config$survey_opts)
+                image_config <- config$image_opts
+                visualization_funs <- golem::get_golem_options("funs")
+                synapse_profile <- syn$getUserProfile()$userName
+                cache_location <- file.path(
+                    "dir", synapse_profile, "downloaded_files")
+                output_location <- file.path(
+                    "dir", synapse_profile, "processed_files")
+                output_filename <- glue::glue(
+                    "{annotator}_{filename}",
+                    filename = synapse_config$output_filename,
+                    annotator = synapse_profile)
+                
+                # create log directory
+                dir.create("log", showWarnings = FALSE)
+                dir.create("dir", showWarnings = FALSE) 
+                
+                # create user directory
+                clear_user_directory(synapse_profile)
+                create_user_directory(synapse_profile)
+                
+                #' get all data and previous data
+                all_data <- get_source_table(
+                    syn = syn, 
+                    filehandle_cols = synapse_config$filehandle_cols,
+                    synapse_tbl_id = synapse_config$synapse_tbl_id)
+                
+                #' get previous image that has been curated
+                curated_data <- get_stored_annotation(
                     syn = syn,
+                    parent_id = synapse_config$output_parent_id,
+                    stored_filename = output_filename,
+                    uid = synapse_config$uid,
+                    keep_metadata = synapse_config$keep_metadata,
+                    survey_colnames = survey_config$survey_colnames
+                )
+                
+                # return feedback message if all images are annotated
+                if(nrow(curated_data) == nrow(all_data)){
+                    waiter_update(
+                        html = tagList(
+                            img(src = "www/synapse_logo.png", height = "120px"),
+                            h4("Thank you, you have finished your annotations"),
+                            h4("Come back next time!")
+                        )
+                    )
+                    return("")
+                }else{
+                    # update waiter loading screen once login successful
+                    waiter::waiter_update(
+                        html = tagList(
+                            img(src = "www/loading.gif"),
+                            h4(sprintf("Retrieving Images from Synapse..."))))
+                    
+                    # batch process image filehandles
+                    annotation_data <- get_annotation_batch(
+                        syn = syn,
+                        all_data = all_data,
+                        curated_data = curated_data,
+                        synapse_tbl_id = synapse_config$synapse_tbl_id,
+                        filehandle_cols = synapse_config$filehandle_cols,
+                        uid = synapse_config$uid, 
+                        survey_colnames = survey_config$survey_colnames,
+                        keep_metadata = synapse_config$keep_metadata,
+                        n_batch = synapse_config$n_batch,
+                        sort_keys = synapse_config$sort_keys,
+                        output_location = output_location,
+                        cache_location = cache_location,
+                        visualization_funs = visualization_funs)
+                    
+                    # update waiter loading screen once login successful
+                    waiter::waiter_update(
+                        html = tagList(
+                            img(src = "www/synapse_logo.png", 
+                                height = "120px"),
+                            h3(sprintf("Welcome, %s!", synapse_profile))
+                        )
+                    )
+                    Sys.sleep(3)
+                    waiter::waiter_hide()
+                }
+                
+                # define reactive values
+                values <- reactiveValues(
+                    profile = synapse_profile,
+                    index = 1,  # image index
+                    user_input = list(),
                     all_data = all_data,
                     curated_data = curated_data,
-                    synapse_tbl_id = synapse_config$synapse_tbl_id,
-                    filehandle_cols = synapse_config$filehandle_cols,
-                    uid = synapse_config$uid, 
-                    survey_colnames = survey_config$survey_colnames,
-                    keep_metadata = synapse_config$keep_metadata,
-                    n_batch = synapse_config$n_batch,
-                    sort_keys = synapse_config$sort_keys,
-                    output_location = output_location,
-                    cache_location = cache_location,
-                    visualization_funs = visualization_funs)
-                
-                # update waiter loading screen once login successful
-                waiter::waiter_update(
-                    html = tagList(
-                        img(src = "www/synapse_logo.png", height = "120px"),
-                        h3(sprintf("Welcome, %s!", synapse_profile))
-                    )
-                )
-                Sys.sleep(3)
-                waiter::waiter_hide()
+                    annotation_data = annotation_data,
+                    post_confirm = FALSE)
             }
-            
-            # define reactive values
-            values <- reactiveValues(
-                profile = synapse_profile,
-                index = 1,  # image index
-                user_input = list(),
-                all_data = all_data,
-                curated_data = curated_data,
-                annotation_data = annotation_data,
-                post_confirm = FALSE)
-            
-            print(curated_data)
-            print(annotation_data)
             
             #######################
             # render user box
@@ -320,7 +329,6 @@ mod_main_server <- function(id, syn) {
                            input_height = image_config$height)
 
                 total_curated <- (values$annotation_data %>% tidyr::drop_na() %>% nrow(.))
-                print(total_curated)
                 if((total_curated == nrow(values$annotation_data)) & !values$post_confirm){
                     ask_confirmation(
                         inputId = "confirmation",
@@ -525,10 +533,6 @@ mod_main_server <- function(id, syn) {
                         searching = FALSE,
                         scrollX = TRUE,
                         lengthChange= FALSE))
-            })
-            
-            observe({
-                print(values$new_data)
             })
         }
     )
