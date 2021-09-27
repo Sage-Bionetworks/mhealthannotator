@@ -135,6 +135,10 @@ mod_main_server <- function(id, syn) {
                  output, 
                  session){
             
+            shiny::req(
+                inherits(syn, "synapseclient.client.Synapse"), 
+                logged_in(syn))
+            
             # check certification
             if(!check_certified_user(syn)){
                 waiter_update(
