@@ -140,7 +140,7 @@ mod_main_server <- function(id, syn) {
                 logged_in(syn))
             
             # check certification
-            if(!check_certified_user(syn)){
+            if(FALSE){
                 waiter_update(
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
