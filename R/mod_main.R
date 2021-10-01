@@ -155,7 +155,7 @@ mod_main_server <- function(id, syn) {
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
                             height = "120px"),
-                        h3("You must become a team member:"),
+                        h3("Join Synapse Team to proceed:"),
                         tags$a(
                             href = url, "Link to Joining Team")
                     )
@@ -163,12 +163,12 @@ mod_main_server <- function(id, syn) {
                 return("")
             
             # check if certified user
-            }else if(FALSE){
+            }else if(!check_certified_user(syn, user_id)){
                 waiter_update(
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
                             height = "120px"),
-                        h3("You must become Certified Synapse User to proceed:"),
+                        h3("Need to be Certified Synapse User to proceed:"),
                         tags$a(
                             href = "https://www.synapse.org/#!Quiz:Certification",
                             "Link to Certification")
