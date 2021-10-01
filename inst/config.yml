@@ -8,6 +8,7 @@ default:
 # all buttons and used for testing purposes
 testing:
     app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
+    team_id: '3425336'
     synapse_opts:
         output_parent_id: 
             - "syn25614357"

@@ -135,12 +135,35 @@ mod_main_server <- function(id, syn) {
                  output, 
                  session){
             
-            shiny::req(
-                inherits(syn, "synapseclient.client.Synapse"), 
-                logged_in(syn))
+            # get user id to check membership
+            user <- syn$getUserProfile()
+            user_id <- user$ownerId
             
-            # check certification
-            if(FALSE){
+            # read configuraiton file
+            config_path <- file.path(
+                golem::get_golem_options("config"))
+            config <- config::get(
+                file = config_path)
+            
+            # get team id if exist
+            team_id <- config$team_id
+            
+            # check team membership
+            if(!check_team_membership(user_id, team_id)){
+                url <- glue::glue("https://www.synapse.org/#!Team:{team_id}")
+                waiter_update(
+                    html = tagList(
+                        img(src = "www/synapse_logo.png", 
+                            height = "120px"),
+                        h3("You must become a team member:"),
+                        tags$a(
+                            href = url, "Link to Joining Team")
+                    )
+                )
+                return("")
+            
+            # check if certified user
+            }else if(!check_certified_user(user_id)){
                 waiter_update(
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
@@ -152,17 +175,15 @@ mod_main_server <- function(id, syn) {
                     )
                 )
                 return("")
-            }else{
-                # read configuraiton file
-                config_path <- 
-                    file.path(golem::get_golem_options("config"))
-                config <- config::get(file = config_path)
                 
-                #' check config
+            # if membership pass run app
+            }else{
+                
+                # check config
                 check_survey_config(config$survey_opts)
                 check_synapse_config(config$synapse_opts)
                 
-                # gett all parameter
+                # get all parameter
                 synapse_config <- config$synapse_opts
                 survey_config <- parse_survey_opts(config$survey_opts)
                 image_config <- config$image_opts
@@ -185,13 +206,13 @@ mod_main_server <- function(id, syn) {
                 clear_user_directory(synapse_profile)
                 create_user_directory(synapse_profile)
                 
-                #' get all data and previous data
+                # get all data and previous data
                 all_data <- get_source_table(
                     syn = syn, 
                     filehandle_cols = synapse_config$filehandle_cols,
                     synapse_tbl_id = synapse_config$synapse_tbl_id)
                 
-                #' get previous image that has been curated
+                # get previous image that has been curated
                 curated_data <- get_stored_annotation(
                     syn = syn,
                     parent_id = synapse_config$output_parent_id,

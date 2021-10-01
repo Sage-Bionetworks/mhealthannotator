@@ -1,7 +1,5 @@
-check_certified_user <- function(syn) {
+check_certified_user <- function(user_id) {
     is_certified <- FALSE
-    user <- syn$getUserProfile()
-    user_id <- user$ownerId
     if(syn$is_certified(user_id)){
         is_certified <- TRUE
     }
