@@ -163,7 +163,7 @@ mod_main_server <- function(id, syn) {
                 return("")
             
             # check if certified user
-            }else if(!check_certified_user(syn, user_id)){
+            }else if(FALSE){
                 waiter_update(
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
