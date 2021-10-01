@@ -114,8 +114,7 @@ get_session_images <- function(data,
   
   # get sql string statement for filtering data in synapse table
   get_subset <- data %>%
-    dplyr::slice(1:n_batch) %>%
-    get_table_string_filters(uid = uid)
+    get_table_string_filters(uid = "recordId")
   
   # get synapse table entity
   entity <- syn$tableQuery(
