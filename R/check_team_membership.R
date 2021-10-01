@@ -14,7 +14,7 @@
 #' user <- syn$getUserProfile()
 #' get_user_teams(user, syn)
 #' }
-check_team_membership <- function(user_id, team_id) {
+check_team_membership <- function(syn, user_id, team_id) {
     team_check_pass <- TRUE
     if(!is.null(team_id)){
         user_teams <- syn$restGET(

@@ -149,7 +149,7 @@ mod_main_server <- function(id, syn) {
             team_id <- config$team_id
             
             # check team membership
-            if(!check_team_membership(user_id, team_id)){
+            if(!check_team_membership(syn, user_id, team_id)){
                 url <- glue::glue("https://www.synapse.org/#!Team:{team_id}")
                 waiter_update(
                     html = tagList(
@@ -163,7 +163,7 @@ mod_main_server <- function(id, syn) {
                 return("")
             
             # check if certified user
-            }else if(!check_certified_user(user_id)){
+            }else if(!check_certified_user(syn, user_id)){
                 waiter_update(
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
