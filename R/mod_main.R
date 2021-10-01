@@ -298,7 +298,7 @@ mod_main_server <- function(id, syn) {
                 total_curated <- (values$annotation_data %>%
                                       tidyr::drop_na() %>% nrow(.))
                 infoBox(
-                    "Session Progress", glue::glue(
+                    "Progress", glue::glue(
                         total_curated, "/", nrow(values$annotation_data),
                         " (", round(100 * total_curated/nrow(
                             values$annotation_data), 1),"% Annotated)"),
@@ -313,9 +313,9 @@ mod_main_server <- function(id, syn) {
             output$totalCurated <- renderInfoBox({
                 perc_curated <- (values$curated_data %>% nrow())/(nrow(values$all_data))
                 infoBox(
-                    "Total Curation in Synapse", glue::glue(values$curated_data %>% nrow(),
-                                                            "/", nrow(values$all_data),
-                                                            " (", round(100 * perc_curated, 1),"% Annotated)"),
+                    "Total in Synapse", glue::glue(values$curated_data %>% nrow(),
+                                                   "/", nrow(values$all_data),
+                                                   " (", round(100 * perc_curated, 1),"%)"),
                     icon = icon("tasks"),
                     color = "purple"
                 )
