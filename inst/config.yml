@@ -140,7 +140,7 @@ psorcast_nail:
         output_parent_id: 
             - "syn26133849"
         synapse_tbl_id: 
-            - "syn26050060" 
+            - "syn26159187" 
         output_filename: 
             - "nail_psoriasis_annotations.tsv"
         filehandle_cols:
@@ -148,7 +148,7 @@ psorcast_nail:
         uid: 
             - "recordId" # unique identifier for that file in synapse table
             - "finger_key"
-        n_batch: 5
+        n_batch: 100
         keep_metadata:
             - "participantId"
             - "createdOn"
