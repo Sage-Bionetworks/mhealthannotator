@@ -148,37 +148,51 @@ mod_main_server <- function(id, syn) {
             # get team id if exist
             team_id <- config$team_id
             
+            # get requirements
+            is_team_member <- check_team_membership(syn, user_id, team_id)
+            is_certified <- check_certified_user(syn, user_id)
+            
+            print(is_team_member)
+            
             # check team membership
-            if(!check_team_membership(syn, user_id, team_id)){
-                url <- glue::glue("https://www.synapse.org/#!Team:{team_id}")
+            if(!is_team_member){
+                team_url <- glue::glue(
+                    "https://www.synapse.org/#!Team:{team_id}")
                 waiter_update(
                     html = tagList(
                         img(src = "www/synapse_logo.png", 
                             height = "120px"),
                         h3("Join Synapse Team to proceed:"),
                         tags$a(
-                            href = url, "Link to Joining Team")
+                            href = team_url, 
+                            "Link to Joining Team")
                     )
                 )
                 return("")
+            }
             
-            # check if certified user
-            }else if(!check_certified_user(syn, user_id)){
+            # check whether user is certified 
+            if(!is_certified){
+                certification_url <- glue::glue(
+                    "https://www.synapse.org/#!Team:{team_id}")
+
+                message <- glue::glue(
+                    "You need to be Synapse Certified User:"
+                )
                 waiter_update(
                     html = tagList(
-                        img(src = "www/synapse_logo.png", 
+                        img(src = "www/synapse_logo.png",
                             height = "120px"),
-                        h3("Need to be Certified Synapse User to proceed:"),
+                        h3(message),
                         tags$a(
-                            href = "https://www.synapse.org/#!Quiz:Certification",
-                            "Link to Certification")
-                    )
+                            href = certification_url,
+                            "Link to be Certified Synapse User"))
                 )
                 return("")
+            }
                 
             # if membership pass run app
-            }else{
-                
+            if(is_certified & is_team_member){
                 # check config
                 check_survey_config(config$survey_opts)
                 check_synapse_config(config$synapse_opts)
