@@ -504,8 +504,18 @@ mod_main_server <- function(id, syn) {
                 )
 
                 # refresh if ran out of images
-                if(nrow(values$all_data) == nrow(values$curated_data)){
-                    shinyjs::refresh()
+                if(nrow(values$all_data) == nrow(values$curated_data)){ 
+                    # send sweet alert
+                    sendSweetAlert(
+                        session = session,
+                        title = "You have finished your annotation!",
+                        text = "You can close the app now.",
+                        type = "success",
+                        closeOnClickOutside = FALSE,
+                        showCloseButton = FALSE,
+                        btn_labels = NA
+                    )
+                    
                 }else{
                     # batch process filehandles
                     values$annotation_data <- get_annotation_batch(
