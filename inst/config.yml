@@ -136,6 +136,8 @@ psorcast_plaque:
                 
 # psorcast nail
 psorcast_nail:
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
+    team_id: '3425336'
     synapse_opts:
         output_parent_id: 
             - "syn26133849"

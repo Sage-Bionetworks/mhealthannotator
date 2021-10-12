@@ -174,7 +174,7 @@ mod_main_server <- function(id, syn) {
             # check whether user is certified 
             if(!is_certified){
                 certification_url <- glue::glue(
-                    "https://www.synapse.org/#!Team:{team_id}")
+                    "https://www.synapse.org/#!Quiz:Certification")
 
                 message <- glue::glue(
                     "You need to be Synapse Certified User:"
