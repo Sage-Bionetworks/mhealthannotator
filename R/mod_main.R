@@ -251,7 +251,7 @@ mod_main_server <- function(id, syn) {
                     waiter::waiter_update(
                         html = tagList(
                             img(src = "www/loading.gif"),
-                            h4(sprintf("Retrieving Images from Synapse..."))))
+                            h4(sprintf("Retrieving Files from Synapse..."))))
                     
                     # batch process image filehandles
                     annotation_data <- get_annotation_batch(

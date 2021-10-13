@@ -42,10 +42,12 @@ parse_slider_value <- function(row_input, selected){
 #' maintaining previously selected buttons and/or
 #' updating it with new ones
 #' 
-#' @param reactive_values access reactive values
+#' @param id namespace id
+#' @param values access reactive values
 #' @param session access shiny session
 #' @param curr_index access current index
 #' @param config access annotator config file
+#' 
 #' @return updated dataframe with input
 update_inputs <- function(id,
                           values,

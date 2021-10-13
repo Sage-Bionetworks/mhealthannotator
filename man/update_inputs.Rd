@@ -9,13 +9,15 @@ updating it with new ones}
 update_inputs(id, values, session, curr_index, config)
 }
 \arguments{
+\item{id}{namespace id}
+
+\item{values}{access reactive values}
+
 \item{session}{access shiny session}
 
 \item{curr_index}{access current index}
 
 \item{config}{access annotator config file}
-
-\item{reactive_values}{access reactive values}
 }
 \value{
 updated dataframe with input

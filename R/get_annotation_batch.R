@@ -70,16 +70,9 @@ add_input_survey_cols <- function(data, survey_colnames){
 #' for filtering Synapse Table before downloading files 
 #' Note: This is done to enable small-batch download
 #' 
+#' @param data dataset to query unique id on
 #' @param uid unique identifier used to 
-#' @return a string of unique identifier that will
-#' be included in the batch with parentheses 
-#' @title Get Table Unique Identifier String Filter
 #' 
-#' @description This is a helper function to build string filter (SQL-like)
-#' for filtering Synapse Table before downloading files 
-#' Note: This is done to enable small-batch download
-#' 
-#' @param uid unique identifier used to 
 #' @return a string of unique identifier that will
 #' be included in the batch with parentheses 
 get_table_string_filters <- function(data, uid){

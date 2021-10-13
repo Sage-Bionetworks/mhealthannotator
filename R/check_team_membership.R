@@ -1,19 +1,12 @@
-#' Get teams a user belongs to
-#'
-#' Looks up the teams a user belongs to. By default, it looks for teams of the
-#' current logged in user. You must be logged in to Synapse to use this
-#' function.
+#' Function to check if user is under a Synapse team
 #'
 #' @noRd
-#' @param user Synapse user object (e.g. output from syn$getUserProfile())
-#' @return Character vector of team IDs the user belongs to
-#' @examples
-#' \dontrun{
-#' syn <- synapse$Synapse()
-#' syn$login()
-#' user <- syn$getUserProfile()
-#' get_user_teams(user, syn)
-#' }
+#' 
+#' @param syn synapselcient
+#' @param user_id synapse user id (numerical)
+#' @param team_id synapse team id
+#' 
+#' @return boolean value if user is a team member
 check_team_membership <- function(syn, user_id, team_id) {
     team_check_pass <- FALSE
     if(!is.null(team_id)){

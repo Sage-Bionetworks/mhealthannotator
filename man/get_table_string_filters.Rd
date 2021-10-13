@@ -7,6 +7,8 @@
 get_table_string_filters(data, uid)
 }
 \arguments{
+\item{data}{dataset to query unique id on}
+
 \item{uid}{unique identifier used to}
 }
 \value{

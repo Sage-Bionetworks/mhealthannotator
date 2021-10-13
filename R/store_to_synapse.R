@@ -31,10 +31,7 @@ store_to_synapse <- function(syn,
                                   dplyr::mutate_all(.funs = as.character)))
     }
     results %>%
-        write.table(output_filename, 
-                    sep = "\t", 
-                    row.names=F, 
-                    quote=F)
+        readr::write_tsv(output_filename)
     file <- synapseclient$File(
         output_filename, 
         parentId = parent_id)

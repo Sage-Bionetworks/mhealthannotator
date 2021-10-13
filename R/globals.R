@@ -1,0 +1,12 @@
+globalVariables(c(":=", ".", 
+                  "value", "name", 
+                  "filePath", "fileHandleId",
+                  "createdOn", "fileName",
+                  "fileColumnName",
+                  "annotationTimestamp",
+                  "jpeg",
+                  "dev.off",
+                  "imagePath",
+                  "basePath", 
+                  "x", "y", "z", "sensorType",
+                  "timestamp"))

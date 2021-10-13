@@ -10,9 +10,6 @@ mod_main_server(id, syn)
 \item{id}{namespace identifier}
 
 \item{syn}{user Synapseclient object
-check config
-get all data and previous data
-get previous image that has been curated
 get all data and previous data
 get previous image that has been curated}
 }
