@@ -6,10 +6,12 @@
 maintaining previously selected buttons and/or
 updating it with new ones}
 \usage{
-update_inputs(reactive_values, session, curr_index, config)
+update_inputs(id, values, session, curr_index, config)
 }
 \arguments{
-\item{reactive_values}{access reactive values}
+\item{id}{namespace id}
+
+\item{values}{access reactive values}
 
 \item{session}{access shiny session}
 

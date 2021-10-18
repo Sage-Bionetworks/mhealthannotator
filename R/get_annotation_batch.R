@@ -55,13 +55,13 @@ sort_rows <- function(data, sort_keys){
 add_input_survey_cols <- function(data, survey_colnames){
   data %>%
     dplyr::mutate_all(as.character) %>%
-      tidyr::drop_na(any_of(c("imagePath"))) %>%
-      dplyr::bind_cols(
-        (survey_tbl <- purrr::map_dfc(
-          survey_colnames, function(x){
-            tibble(!!sym(x) := as.character(NA))
-          }))) %>%
-      dplyr::mutate(annotationTimestamp = NA_character_)
+    tidyr::drop_na(any_of(c("imagePath"))) %>%
+    dplyr::bind_cols(
+      (survey_tbl <- purrr::map_dfc(
+        survey_colnames, function(x){
+          tibble(!!sym(x) := as.character(NA))
+        }))) %>%
+    dplyr::mutate(annotationTimestamp = NA_character_)
 }
 
 #' @title Get Table Unique Identifier String Filter
@@ -70,16 +70,9 @@ add_input_survey_cols <- function(data, survey_colnames){
 #' for filtering Synapse Table before downloading files 
 #' Note: This is done to enable small-batch download
 #' 
+#' @param data dataset to query unique id on
 #' @param uid unique identifier used to 
-#' @return a string of unique identifier that will
-#' be included in the batch with parentheses 
-#' @title Get Table Unique Identifier String Filter
 #' 
-#' @description This is a helper function to build string filter (SQL-like)
-#' for filtering Synapse Table before downloading files 
-#' Note: This is done to enable small-batch download
-#' 
-#' @param uid unique identifier used to 
 #' @return a string of unique identifier that will
 #' be included in the batch with parentheses 
 get_table_string_filters <- function(data, uid){
@@ -122,12 +115,13 @@ get_session_images <- function(data,
   
   # get sql string statement for filtering data in synapse table
   get_subset <- data %>%
+    dplyr::slice(1:n_batch) %>%
     get_table_string_filters(uid = "recordId")
   
   # get synapse table entity
   entity <- syn$tableQuery(
     glue::glue(
-      "SELECT * FROM {synapse_tbl_id} WHERE {get_subset} LIMIT {n_batch}"))
+      "SELECT * FROM {synapse_tbl_id} WHERE {get_subset}"))
   
   # download all table columns
   syn$downloadTableColumns(

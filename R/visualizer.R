@@ -1,10 +1,14 @@
-#' @title function for mpower V2 sensor visualization
+
+#' @title function for mpower-V2 sensors visualization
 #' 
 #' @description this function is used to visualize a 
-#' filepath for gait data in Synapse table
+#' filepath of sensor in Synapse table using mPower
+#' V2 format; it will plot acceleration, 
+#' gyroscope and gravity readings on x, y, z axis
 #' 
 #' @import ggplot2
 #' @import patchwork
+#' @import dplyr
 #' @importFrom magrittr "%>%"
 #' 
 #' @export
@@ -12,7 +16,7 @@
 #' @param filepath the corresponding filepath being used
 #' 
 #' @return the output filepath for the visualization
-visualize_mpower_gait <- function(filepath){
+visualize_mpower_v2_sensor <- function(filepath){
     shape_sensor_data <- function(filepath){
         ts <- filepath %>%
             jsonlite::fromJSON(.) %>%
@@ -109,13 +113,18 @@ visualize_mpower_gait <- function(filepath){
     return(output_filename)
 }
 
-#' @title function for mpower V1 sensor visualization
+
+#' @title function for mpower-V1 sensors visualization
 #' 
 #' @description this function is used to visualize a 
-#' filepath for gait data in Synapse table
+#' filepath for gait data in Synapse table using mPower
+#' V1 format (device_motion IOS) it will plot
+#' acceleration, gyroscope and gravity readings on
+#' x, y, z axis
 #' 
 #' @import ggplot2
 #' @import patchwork
+#' @import dplyr
 #' @importFrom magrittr "%>%"
 #' 
 #' @export
@@ -123,7 +132,7 @@ visualize_mpower_gait <- function(filepath){
 #' @param filepath the corresponding filepath being used
 #' 
 #' @return the output filepath for the visualization
-visualize_device_motion <- function(filepath){
+visualize_dvmotion_mpower_v1_sensors <- function(filepath){
     shape_sensor_data <- function(filepath){
         ts <- filepath %>%
             jsonlite::fromJSON(.) 

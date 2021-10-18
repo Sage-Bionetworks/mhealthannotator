@@ -7,6 +7,8 @@ default:
 
 # all buttons and used for testing purposes
 testing:
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
+    team_id: '3425336'
     synapse_opts:
         output_parent_id: 
             - "syn25614357"
@@ -131,6 +133,36 @@ psorcast_plaque:
                 3: 3
                 4: 4
                 Can't Tell: "Can't Tell"
+                
+# psorcast nail
+psorcast_nail:
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
+    team_id: '3425336'
+    synapse_opts:
+        output_parent_id: 
+            - "syn26133849"
+        synapse_tbl_id: 
+            - "syn26159187" 
+        output_filename: 
+            - "nail_psoriasis_annotations.tsv"
+        filehandle_cols:
+            - "finger_segments"
+        uid: 
+            - "recordId" # unique identifier for that file in synapse table
+            - "finger_key"
+        n_batch: 100
+        keep_metadata:
+            - "participantId"
+            - "createdOn"
+    survey_opts:
+        survey_1:
+                colname: "nail_pso_status"
+                type: "radio"
+                prompt: "Detected Nail Psoriasis:"
+                input_choices:
+                    Yes: 'TRUE'
+                    No: 'FALSE'
+                    Can't Tell: "Can't Tell"
 
 # psorcast nail
 psorcast_nail:
@@ -256,14 +288,14 @@ mpower_gait_checks:
         output_parent_id: 
             - "syn24986703"
         synapse_tbl_id: 
-            - "syn25981806"
+            - "syn26064128"
         output_filename: 
             - "mpower_v1_checks_gait_annotations.tsv"
         filehandle_cols:
             - "deviceMotion_walking_outbound.json.items"
         uid: 
             - "recordId"
-        n_batch: 50
+        n_batch: 5
         keep_metadata:
             - "healthCode"
             - "createdOn"

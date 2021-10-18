@@ -12,205 +12,21 @@
 #' @return none
 #' @export
 app_server <- function( input, output, session ) {
-  
   # instantiate synapse
   syn <- synapseclient$Synapse()
-  
-  # read configuraiton file
-  config_path <- 
-    file.path(golem::get_golem_options("config"))
-  config <- config::get(file = config_path)
-  
-  #' check config
-  check_survey_config(config$survey_opts)
-  check_synapse_config(config$synapse_opts)
-  
-  # parse all configuration type
-  synapse_config <- config$synapse_opts
-  survey_config <- parse_survey_opts(config$survey_opts)
-  image_config <- config$image_opts
-  visualization_funs <- golem::get_golem_options("funs")
-  
-  
-  # define reactive values
-  values <- reactiveValues(
-    ii=1,  # image index
-    userInput = list(), # what is the user input
-    allDf = NA, # whole dataframe
-    useDf = NA, # dataframe being used for current annotating session
-    curatedDf = NA, # dataframe that has already been stored in synapse
-    currentAnnotator = NA, # who is the current annotator
-    parentId = NA, # what is the parent id 
-    fileName = NA, # what is the filename
-    postConfirm = FALSE, # extra handler if already been confirmed
-    cacheLocation = NA,
-    outputLocation = NA
-  )
-  
-  # read synapse session cookie
-  session$sendCustomMessage(type="readCookie", message=list())
-  
-  
-  #########################
-  # instantiate shiny app
-  #########################
-  observeEvent(input$cookie, {
-    # If there's no session token, prompt user to log in
-    if (input$cookie == "unauthorized") {
-      waiter::waiter_update(
-        html = tagList(
-          img(src = "www/synapse_logo.png", height = "120px"),
-          h3("Looks like you're not logged in!"),
-          span("Please ", 
-               a("login", href = "https://www.synapse.org/#!LoginPlace:0", 
-                 target = "_blank"),
-               " to Synapse, then refresh this page.")
-        )
-      )
-    } else {
-      ### login and update session; otherwise, notify to login to Synapse first
-      tryCatch({
-        syn$login(sessionToken = input$cookie, rememberMe = FALSE)
-        
-        # update data after updating session
-        values$currentAnnotator <- syn$getUserProfile()$userName
-        values$fileName <-glue::glue(
-          "{annotator}_{filename}",
-          filename = synapse_config$output_filename,
-          annotator = values$currentAnnotator)
-        
-        # create log directory
-        dir.create("log", showWarnings = FALSE)
-        dir.create("dir", showWarnings = FALSE) 
-        
-        # create user directory
-        clear_user_directory(values$currentAnnotator)
-        create_user_directory(values$currentAnnotator)
-        
-        # set cache and output location based on user
-        values$cacheLocation <- file.path(
-          "dir", values$currentAnnotator, "downloaded_files")
-        values$outputLocation <- file.path(
-          "dir", values$currentAnnotator, "processed_files")
-        
-        #' get all data and previous data
-        values$allDf <- get_source_table(
-          syn = syn, 
-          filehandle_cols = synapse_config$filehandle_cols,
-          synapse_tbl_id = synapse_config$synapse_tbl_id)
-        
-        #' get previous image that has been curated
-        values$curatedDf <- get_stored_annotation(
-          syn = syn,
-          parent_id = synapse_config$output_parent_id,
-          stored_filename = values$fileName,
-          uid = synapse_config$uid,
-          keep_metadata = synapse_config$keep_metadata,
-          survey_colnames = survey_config$survey_colnames
-        )
-        
-        # check if user has annotated everything
-        if(nrow(values$curatedDf) ==  nrow(values$allDf)){
-          waiter_update(
-            html = tagList(
-              img(src = "www/synapse_logo.png", height = "120px"),
-              h2("You have gotten through all the images, great work!"),
-              h3("Come again next time!")
-            )
-          )
-          return("")
-        }
-        
-        # batch process filehandles
-        values$useDf <- get_annotation_batch(
-          syn = syn,
-          all_data = values$allDf,
-          curated_data = values$curatedDf,
-          synapse_tbl_id = synapse_config$synapse_tbl_id,
-          filehandle_cols = synapse_config$filehandle_cols,
-          uid = synapse_config$uid, 
-          survey_colnames = survey_config$survey_colnames,
-          keep_metadata = synapse_config$keep_metadata,
-          n_batch = synapse_config$n_batch,
-          sort_keys = synapse_config$sort_keys,
-          output_location = values$outputLocation,
-          cache_location = values$cacheLocation,
-          visualization_funs = visualization_funs
-        )
-        
-        # return feedback message if all images are annotated
-        if(nrow(values$curatedDf) == nrow(values$allDf)){
-          waiter_update(
-            html = tagList(
-              img(src = "www/synapse_logo.png", height = "120px"),
-              h2("Apparently, we ran out of images to annotate:"),
-              h3("Come back next time!")
-            )
-          )
-          return("")
-        }
-        
-        # update waiter loading screen once login successful
-        waiter::waiter_update(
-          html = tagList(
-            img(src = "www/loading.gif"),
-            h4(sprintf("Retrieving Synapse information...")),
-            h4(sprintf("Retrieving Images from Synapse..."))
-          )
-        )
-        
-        # update waiter loading screen once login successful
-        waiter::waiter_update(
-          html = tagList(
-            img(src = "www/synapse_logo.png", height = "120px"),
-            h3(sprintf("Welcome, %s!", syn$getUserProfile()$userName))
-          )
-        )
-        Sys.sleep(3)
-        waiter::waiter_hide()
-      }, error = function(err) {
-        # get error message
-        Sys.sleep(2)
-        error_msg <- stringr::str_squish(geterrmessage())
-        
-        # get error logs and save to logs
-        tmp <- file.path(
-          "log",
-          glue::glue(
-            gsub('[[:punct:] ]+',"", 
-                 lubridate::now() %>% 
-                   as.character(.)), 
-            "_error.log"))
-        sink(tmp)
-        cat(glue::glue("ERROR: {error_msg}"))
-        sink()
-        
-        # update using waiter if there is error message in logfile
-        waiter::waiter_update(
-          html = tagList(
-            img(src = "synapse_logo.png", height = "120px"),
-            h2("ERROR:"),
-            span("Please check your errors in error log directory (log/)")
-          )
-        )
-      })
-      
-      # Any shiny app functionality that uses synapse should be within the
-      # input$cookie observer
-      output$title <- renderUI({
-        titlePanel(sprintf("Welcome, %s", syn$getUserProfile()$userName))
-      })
-    }
-  })
-  
-  #######################
-  # render user box
-  #######################
-  output$userBox <- renderInfoBox({
-    infoBox(
-      "Annotator", values$currentAnnotator, icon = icon("user"),
-      color = "orange"
+  if(interactive()){
+    attempt_login(syn)
+  }else{
+   # use oauth 
+    syn <- mod_synapse_oauth_server(
+      id = "oauth",
+      syn = syn
     )
+  }
+  shiny::req(
+    inherits(syn, "synapseclient.client.Synapse"), 
+    logged_in(syn))
+  mod_main_server("main", syn = syn) 
   })
 
   #########################

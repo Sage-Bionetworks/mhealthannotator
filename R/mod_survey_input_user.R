@@ -101,9 +101,9 @@ mod_survey_input_user_server <- function(input, output, session, survey_colnames
   purrr::walk(survey_colnames, function(col){
     observeEvent(input[[col]], {
       if(is.null(input[[col]])){
-        values$userInput[[col]] <- ""
+        values$user_input[[col]] <- ""
       }else{
-        values$userInput[[col]] <- glue::glue_collapse(
+        values$user_input[[col]] <- glue::glue_collapse(
           input[[col]], sep = ", ")
       }
     }, ignoreNULL = FALSE)

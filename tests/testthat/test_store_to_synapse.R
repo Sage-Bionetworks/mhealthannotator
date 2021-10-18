@@ -1,3 +1,4 @@
+# attempt login to synapse
 syn <- attempt_instantiate()
 tryCatch(
     attempt_login(syn),
@@ -10,6 +11,8 @@ Sys.setenv(R_CONFIG_ACTIVE = "testing")
 
 #' check if get source table results to a dataframe
 test_that("get_source_table returns a data frame", {
+    parent_id <- "syn26340454"
+    
     skip_if_not(logged_in(syn = syn))
     
     # some variables
@@ -17,7 +20,6 @@ test_that("get_source_table returns a data frame", {
     stored_data <- tibble::tibble(tmp = c(seq(1,5))) %>%
         dplyr::mutate(annotator = current_annotator)
     new_data <- tibble::tibble(tmp = c(seq(6,10)))
-    parent_id <- "syn25946302"
     output_filename <- "test.tsv"
     
     # test function
@@ -32,7 +34,8 @@ test_that("get_source_table returns a data frame", {
     
     # get stored data
     stored_syn_id <- syn$findEntityId(
-        "test.tsv", parent = "syn25946302")
+        "test.tsv", 
+        parent = parent_id)
     
     # check if data is stored
     expect_true(inherits(stored_syn_id, "character"))

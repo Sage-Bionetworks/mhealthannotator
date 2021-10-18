@@ -4,9 +4,11 @@
 \alias{get_table_string_filters}
 \title{Get Table Unique Identifier String Filter}
 \usage{
-get_table_string_filters(uid)
+get_table_string_filters(data, uid)
 }
 \arguments{
+\item{data}{dataset to query unique id on}
+
 \item{uid}{unique identifier used to}
 }
 \value{

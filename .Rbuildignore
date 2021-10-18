@@ -24,3 +24,5 @@
 ^rsconnect$
 ^doc$
 ^Meta$
+^docs$
+^pkgdown$
