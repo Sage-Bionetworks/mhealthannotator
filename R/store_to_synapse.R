@@ -4,7 +4,7 @@
 #' @param synapseclient synapseclient library
 #' @param parent_id parent id to store dataframe
 #' @param new_data current annotations dataframe
-#' @param stored_data previously stored annotationx dataframe
+#' @param stored_data previously stored annotation dataframe
 #' @param current_annotator current annotator as file prefix
 #' @param output_filename name of the data output
 #' @param ... additional info, will be used for provenance
