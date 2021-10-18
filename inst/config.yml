@@ -70,8 +70,10 @@ testing:
         width: "97%"
         height: "97%"
 
-# psorcast plaque configuration
+# all buttons and used for testing purposes
 psorcast_plaque:
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
+    team_id: '3425336'
     synapse_opts:
         output_parent_id: 
             - "syn25614357"
@@ -84,10 +86,12 @@ psorcast_plaque:
             - "psoriasisAreaPhoto.png"
         uid: 
             - "recordId" # unique identifier for that file in synapse table
-        n_batch: 50
+        n_batch: 5
         keep_metadata:
             - "participantId"
             - "createdOn"
+        sort_keys:
+            - "recordId" # optional
     survey_opts:
         survey_1:
                 colname: "PGA"
@@ -102,7 +106,7 @@ psorcast_plaque:
                     Can't Tell: "Can't Tell"
         survey_2:
             colname: "erythema"
-            type: "radio"
+            type: "checkbox_group"
             prompt: "Erythema:"
             input_choices:
                 0: 0
@@ -113,26 +117,23 @@ psorcast_plaque:
                 Can't Tell: "Can't Tell"
         survey_3:
             colname: "induration"
-            type: "radio"
+            type: "slider"
             prompt: "Induration:"
             input_choices:
-                0: 0
-                1: 1
-                2: 2
-                3: 3
-                4: 4
-                Can't Tell: "Can't Tell"
+                min: 0
+                max: 5
+                step: 1
         survey_4:
             colname: "scaling"
-            type: "radio"
+            type: "slider"
             prompt: "Scaling:"
             input_choices:
-                0: 0
-                1: 1
-                2: 2
-                3: 3
-                4: 4
-                Can't Tell: "Can't Tell"
+                min: 0
+                max: 5
+                step: 1
+    image_opts:
+        width: "97%"
+        height: "97%"
                 
 # psorcast nail
 psorcast_nail:
@@ -163,167 +164,3 @@ psorcast_nail:
                     Yes: 'TRUE'
                     No: 'FALSE'
                     Can't Tell: "Can't Tell"
-
-# psorcast nail
-psorcast_nail:
-    synapse_opts:
-        output_parent_id: 
-            - "syn25614357"
-        synapse_tbl_id: 
-            - "syn26050060" 
-        output_filename: 
-            - "nail_psoriasis_annotations.tsv"
-        filehandle_cols:
-            - "finger_segments"
-        uid: 
-            - "recordId" # unique identifier for that file in synapse table
-            - "finger_key"
-        n_batch: 50
-        keep_metadata:
-            - "participantId"
-            - "createdOn"
-    survey_opts:
-        survey_1:
-                colname: "nail_pso_status"
-                type: "radio"
-                prompt: "Does this nail has Psoriasis:"
-                input_choices:
-                    Yes: 'TRUE'
-                    No: 'FALSE'
-                    Can't Tell: "Can't Tell"
-
-# psorcast hand omaging configuration
-psorcast_hand_imaging:
-    synapse_opts:
-        output_parent_id: 
-            - "syn25614059"
-        synapse_tbl_id: 
-            - "syn22281749" 
-        output_filename: 
-            - "psorcast_hand_imaging_annotations.tsv"
-        filehandle_cols:
-            - "summaryImage.jpg"
-        uid: 
-            - "recordId" # unique identifier for that file in synapse table
-        n_batch: 5
-        keep_metadata:
-            - "participantId"
-            - "createdOn"
-    survey_opts:
-        survey_1:
-            colname: "left_nail_psoriasis"
-            type: "checkbox_group"
-            prompt: "Select Left-Hand Nail Psoriasis:"
-            selected: "None"
-            input_choices:
-                - "None"
-                - "L1"
-                - "L2"
-                - "L3"
-                - "L4"
-                - "L5"
-        survey_2:
-            colname: "right_nail_psoriasis"
-            type: "checkbox_group"
-            prompt: "Select Right-Hand Nail Psoriasis:"
-            selected: "None"
-            input_choices:
-                - "None"
-                - "R1"
-                - "R2"
-                - "R3"
-                - "R4"
-                - "R5"
-    image_opts: 
-        width: "95%"
-        height: "95%"
-        
-# mpower gait
-mpower_gait:
-    synapse_opts:
-        output_parent_id: 
-            - "syn24986703"
-        synapse_tbl_id: 
-            - "syn12514611" 
-        output_filename: 
-            - "mpower_v2_gait_annotations.tsv"
-        filehandle_cols:
-            - "walk_motion.json"
-        uid: 
-            - "recordId"
-        n_batch: 5
-        keep_metadata:
-            - "healthCode"
-            - "createdOn"
-            - "phoneInfo"
-        sort_keys:
-            - "recordId"
-    survey_opts:
-        survey_1:
-            colname: "walk_status"
-            type: "radio"
-            prompt: "Can you guess this user's gait?"
-            input_choices: 
-                Walking: "Walking"
-                Mostly Walking: "Mostly Walking"
-                Some Walking: "Some Walking"
-                Not Walking: "Not Walking"
-                Can't Tell: "Can't Tell"
-        survey_2:
-            colname: "pocket_status"
-            type: "radio"
-            prompt: "Is this phone inside the pocket?"
-            input_choices:
-                In Pocket: "In Pocket"
-                Partially in Pocket: "Partially in Pocket"
-                Not in Pocket: "Not in Pocket"
-                Can't Tell: "Can't Tell"
-    image_opts: 
-        width: "750px"
-        height: "450px"
-        
-# mpower gait
-mpower_gait_checks:
-    synapse_opts:
-        output_parent_id: 
-            - "syn24986703"
-        synapse_tbl_id: 
-            - "syn26064128"
-        output_filename: 
-            - "mpower_v1_checks_gait_annotations.tsv"
-        filehandle_cols:
-            - "deviceMotion_walking_outbound.json.items"
-        uid: 
-            - "recordId"
-        n_batch: 5
-        keep_metadata:
-            - "healthCode"
-            - "createdOn"
-            - "phoneInfo"
-            - "diagnosis"
-            - "walking"
-        sort_keys: "random"
-    survey_opts:
-        survey_1:
-            colname: "walk_status"
-            type: "radio"
-            prompt: "Can you guess this user's gait?"
-            input_choices: 
-                Walking: "Walking"
-                Mostly Walking: "Mostly Walking"
-                Some Walking: "Some Walking"
-                Not Walking: "Not Walking"
-                Can't Tell: "Can't Tell"
-        survey_2:
-            colname: "pocket_status"
-            type: "radio"
-            prompt: "Is this phone inside the pocket?"
-            input_choices:
-                In Pocket: "In Pocket"
-                Partially in Pocket: "Partially in Pocket"
-                Not in Pocket: "Not in Pocket"
-                Can't Tell: "Can't Tell"
-    image_opts: 
-        width: "750px"
-        height: "450px"
-    
