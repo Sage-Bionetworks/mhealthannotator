@@ -24,7 +24,7 @@ store_to_synapse(
 
 \item{new_data}{current annotations dataframe}
 
-\item{stored_data}{previously stored annotationx dataframe}
+\item{stored_data}{previously stored annotation dataframe}
 
 \item{current_annotator}{current annotator as file prefix}
 

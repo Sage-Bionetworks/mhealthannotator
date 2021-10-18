@@ -3,6 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   build_config_schema: build_config_schema.html
+  deploying_mhealthannotator: deploying_mhealthannotator.html
   how_to_mhealthannotator: how_to_mhealthannotator.html
-last_built: 2021-08-30T04:56Z
+last_built: 2021-10-18T23:14Z
 
