@@ -6,8 +6,19 @@ tryCatch(
     }
 )
 
+table_columns <- c("recordId", 
+                   "appVersion", 
+                   "externalId", 
+                   "dataGroups",
+                  "createdOn", 
+                  "createdOnTimeZone", 
+                  "participantId",
+                  "selectedZoneIdentifier",
+                  "fileColumnName", "fileHandleId")
+file_columns_identifier <- c("psoriasisAreaPhoto.jpg","psoriasisAreaPhoto.png")
+
 #' check if get source table results to a dataframe
-test_that("get_source_table returns a data frame", {
+test_that("get_source_table returns the right format", {
     skip_if_not(logged_in(syn = syn))
     result <- get_source_table(syn = syn, 
                                filehandle_cols = c(
@@ -15,4 +26,15 @@ test_that("get_source_table returns a data frame", {
                                    "psoriasisAreaPhoto.png"),
                                synapse_tbl_id = "syn22281748")
     expect_true(inherits(result, "data.frame"))
+    expect_equal(result %>% 
+                     names(.) %>%
+                     sort(), 
+                 table_columns %>%
+                     sort())
+    expect_equal(result %>% 
+                     .$fileColumnName %>%
+                     unique() %>%
+                     sort(), 
+                 file_columns_identifier %>% 
+                     sort())
 })
