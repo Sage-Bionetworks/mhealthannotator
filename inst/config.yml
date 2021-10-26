@@ -11,11 +11,11 @@ testing:
     team_id: '3425336'
     synapse_opts:
         output_parent_id: 
-            - "syn25614357"
+            - "syn26340454"
         synapse_tbl_id: 
             - "syn22281748" 
         output_filename: 
-            - "psoriasis_plaque_annotations.tsv"
+            - "test_annotations.tsv"
         filehandle_cols:
             - "psoriasisAreaPhoto.jpg"
             - "psoriasisAreaPhoto.png"

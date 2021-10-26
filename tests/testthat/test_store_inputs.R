@@ -1,3 +1,8 @@
+####################################################
+#' Test script to check if store survey inputs
+#' is correctly placed to chosen index (uid)
+####################################################
+
 # test data
 test_data <- tibble::tibble(
     uid = c("row_1", "row_2"),

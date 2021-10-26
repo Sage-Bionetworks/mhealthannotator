@@ -46,7 +46,5 @@ dir/*
 
 # ignore dev
 dev/*
-inst/doc
-doc
 Metas
 /Meta/

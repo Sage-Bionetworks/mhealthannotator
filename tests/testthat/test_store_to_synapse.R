@@ -1,3 +1,8 @@
+####################################################
+#' Test script to check if store_to_synapse is able
+#' to store data to synapse
+####################################################
+
 # attempt login to synapse
 syn <- attempt_instantiate()
 tryCatch(

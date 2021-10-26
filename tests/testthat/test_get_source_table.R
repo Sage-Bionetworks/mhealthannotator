@@ -1,3 +1,8 @@
+####################################################
+#' Test script to check if get_source_table is able
+#' to get desirable format
+####################################################
+
 syn <- attempt_instantiate()
 tryCatch(
     attempt_login(syn),

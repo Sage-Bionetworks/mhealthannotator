@@ -1,8 +1,17 @@
+####################################################
+#' Test script to check if get_annotation_batch is able
+#' to get desirable format
+####################################################
+
+
+#' Function to clean up test directories
 clean_test_dir <- function(){
     unlink("output", recursive = TRUE)
     unlink("cache", recursive = TRUE)
 }
 
+#' Function to create directories for caching downloaded images
+#' and storing output/processed images
 create_directories <- function(){
     output_dir <- "output"
     dir.create(output_dir, showWarnings = FALSE)
@@ -12,7 +21,7 @@ create_directories <- function(){
 }
 
 
-#' function to create dataframe for sensor samples
+#' Function to create dummy data
 create_data <- function(){
     tibble::tibble(t = seq(0,30, by = 0.01)) %>%
         dplyr::mutate(x = rnorm(nrow(.)),
@@ -20,6 +29,7 @@ create_data <- function(){
                       z = rnorm(nrow(.), mean = 1))
 }
 
+#' Function to create dummy files data
 create_samples <- function(n){
     purrr::map_dfr(c(1:n), function(x){
         output <- glue::glue("cache/sample_{x}.tsv", x = x)
@@ -29,6 +39,8 @@ create_samples <- function(n){
     })
 }
 
+#' Test function for testing if function
+#' is parseable 
 test_funs <- function(filePath){
     output_filepath <- file.path(
         glue::glue(gsub(
@@ -56,7 +68,8 @@ ref_list <- list(
     filehandle_cols = c("psoriasisAreaPhoto.jpg",
                         "psoriasisAreaPhoto.png"),
     uid = c("recordId"),
-    cache_location = "output"
+    cache_location = "cache",
+    output_dir = "output"
 )
 
 # test data 1
@@ -135,9 +148,9 @@ test_that("test get_session_images able to download tables and store in output f
 test_that("visualize_column_files returns desired filepath output", {
     create_directories()
     test_data <- create_samples(5) %>%
-        visualize_column_files(test_funs, output_dir)
+        visualize_column_files(test_funs, ref_list$output_dir)
     output_target <- purrr::map_chr(test_data$imagePath, ~basename(.x))
-    output_files <- list.files(output_dir)
+    output_files <- list.files(ref_list$output_dir)
     expect_equal(output_target, output_files)
     clean_test_dir()
 })
@@ -172,7 +185,6 @@ test_that("test get_annotation_batch to annotation app data placeholder",{
     
     # check if data is populated
     expect_true((data_remove_empty %>% nrow()) == ref_list$n_batch)
-    
     clean_test_dir()
 })
 
