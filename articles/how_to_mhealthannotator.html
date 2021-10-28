@@ -142,7 +142,7 @@
 <div id="create-configuration-file" class="section level4">
 <h4 class="hasAnchor">
 <a href="#create-configuration-file" class="anchor"></a>Create Configuration File:</h4>
-<p>To create a config file, the app will accept config.yml files containing key-values pair. As a reference, you can check inst/config.yml for config file template. To check whether you are using the correct and available parameters you can run <code>mhealthannotator::check_config(PATH_TO_CONFIG)</code>.</p>
+<p>To create a config file, the app will accept config.yml files containing key-values pair. The code chunk below can be used as a template for reference.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># template to use for config file</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>default<span class="op">:</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="st">    </span>app_url<span class="op">:</span><span class="st"> 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'</span></span>
@@ -212,11 +212,11 @@
 <h4 class="hasAnchor">
 <a href="#run-your-app-using-the-config-and-visualization-function" class="anchor"></a>Run your App using the config and visualization function:</h4>
 <p>To run the app, you will only require two parameters, which is the configurations file and your desired function.</p>
+<p>You can refer to <a href="https://sage-bionetworks.github.io/mhealthannotator/articles/build_config_schema.html">Schema Configuration</a> to customize each of the parameter of the configuration file. To check whether you are using the correct and available parameters you can run <code>mhealthannotator::validate_config_file(&lt;path_to_config&gt;)</code>.</p>
+<p>Afterwards, you will be able to run the app by invoking:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">mhealthannotator</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span>
-    config <span class="op">=</span> <span class="st">"config.yml"</span>,
-    funs <span class="op">=</span> <span class="va">visualize_photo</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">mhealthannotator</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span>config <span class="op">=</span> <span class="st">"config.yml"</span>,
+                          funs <span class="op">=</span> <span class="va">visualize_photo</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="additional-notes" class="section level4">
 <h4 class="hasAnchor">
