@@ -142,8 +142,23 @@ mod_main_server <- function(id, syn) {
             # read configuraiton file
             config_path <- file.path(
                 golem::get_golem_options("config"))
-            config <- config::get(
-                file = config_path)
+            
+            # get validation check for config file
+            validate_config <- validate_config_file(config_path)
+            
+            if(!validate_config$success){
+                waiter_update(
+                    html = tagList(
+                        img(src = "www/synapse_logo.png", 
+                            height = "120px"),
+                        h4(validate_config$message)
+                    )
+                )
+                return("")
+            }
+            
+            # get config file
+            config <- config::get(file = config_path)
             
             # get team id if exist
             team_id <- config$team_id
@@ -151,8 +166,6 @@ mod_main_server <- function(id, syn) {
             # get requirements
             is_team_member <- check_team_membership(syn, user_id, team_id)
             is_certified <- check_certified_user(syn, user_id)
-            
-            print(is_team_member)
             
             # check team membership
             if(!is_team_member){
@@ -193,10 +206,6 @@ mod_main_server <- function(id, syn) {
                 
             # if membership pass run app
             if(is_certified & is_team_member){
-                # check config
-                check_survey_config(config$survey_opts)
-                check_synapse_config(config$synapse_opts)
-                
                 # get all parameter
                 synapse_config <- config$synapse_opts
                 survey_config <- parse_survey_opts(config$survey_opts)

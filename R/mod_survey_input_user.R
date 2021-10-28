@@ -19,7 +19,6 @@ mod_survey_input_user_ui <- function(id){
   #' read config file
   config_path <- file.path(golem::get_golem_options("config"))
   survey_config <- config::get(file = config_path) %>% .$survey_opts
-  check_survey_config(survey_config)
   
   #' create based on config
   tagList(

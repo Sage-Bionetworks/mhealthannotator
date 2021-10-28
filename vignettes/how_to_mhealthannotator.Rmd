@@ -50,7 +50,7 @@ visualize_photo <- function(filepath){
 ```
 
 #### Create Configuration File:
-To create a config file, the app will accept config.yml files containing key-values pair. As a reference, you can check inst/config.yml for config file template. To check whether you are using the correct and available parameters you can run `mhealthannotator::check_config(PATH_TO_CONFIG)`.
+To create a config file, the app will accept config.yml files containing key-values pair. The code chunk below can be used as a template for reference.
 
 ```{r eval=FALSE}
 # template to use for config file
@@ -123,11 +123,14 @@ default:
 #### Run your App using the config and visualization function:
 To run the app, you will only require two parameters, which is the configurations file and your desired function. 
 
+You can refer to [Schema Configuration](https://sage-bionetworks.github.io/mhealthannotator/articles/build_config_schema.html) to customize each of the parameter of the configuration file. To check whether you are using the correct and available parameters you can run `mhealthannotator::validate_config_file(<path_to_config>)`. 
+
+
+Afterwards, you will be able to run the app by invoking:
+
 ```{r eval=FALSE}
-mhealthannotator::run_app(
-    config = "config.yml",
-    funs = visualize_photo
-)
+mhealthannotator::run_app(config = "config.yml",
+                          funs = visualize_photo)
 ```
 
 

@@ -6,7 +6,7 @@ default:
         output_parent_id: 
             - "syn26340454"
         synapse_tbl_id: 
-            - "syn22281748" 
+            - 2
         output_filename: 
             - "test_annotations.tsv"
         filehandle_cols:
