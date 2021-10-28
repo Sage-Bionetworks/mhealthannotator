@@ -40,7 +40,7 @@ stand up a new version that is customized for a different community):
 1. Create a .Renviron file with the [verified OAuth](https://help.synapse.org/docs/Using-Synapse-as-an-OAuth-Server.2048327904.html#UsingSynapseasanOAuthServer-RegisteringandLinkinganOAuth2.0Client) `client_name`, `client_id` and `client_secret`
 and restrict permissions (`chmod 600 .Renviron` or `chmod 400 .Renviron`)
 1. To ensure packages are up-to-date, open an R session and run `renv::restore()`
-```
+1. Note: Make sure that your Python environment is correctly configured using reticulate with [synapseclient](https://python-docs.synapse.org/build/html/reticulate.html)
 
 Again, you may need to run `touch restart.txt` afterward to ensure the
 application is restarted.

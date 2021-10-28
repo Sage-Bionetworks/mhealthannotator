@@ -1,62 +1,34 @@
-# mhealthannotator
+## mhealthannotator
 
-## About:
-Mhealthannotator is an RShiny Golem Package utilized for annotating labels on PHI images/visualization from Files in attached in Synapse Tables. The purpose of this package is to enable researchers to easily deploy their customized RShiny App, and have it all integrated seamlessly into Synapse for PHI data access. 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/Sage-Bionetworks/mhealthannotator/workflows/R-CMD-check/badge.svg)](https://github.com/Sage-Bionetworks/mhealthannotator/actions)
+<!-- badges: end -->
 
-## Use-case:
+Mhealthannotator is an RShiny Package used for creating dashboard as a service that can easily visualize Files in Synapse Tables. The goal of this app is to let users be able to easily deploy apps for annotating/labelling data to collaborators more seamlessly. It's used in the mPower and Psorcast project to help create labelled data for analysis and validation to our unlabelled digital health datasets.
 
-It will help interact with Synapse by providing: 
-
-a. Configuration files: 
-- Containing information to interact with synapse
-- Containing information to the RShiny App UI/UX
-
-b. Visuallization functions: Custom function you want to use to visualize your data
-
-## Installation
-Current package is not distributed via CRAN but will be installable through Github as we are doing further testing and future use-cases.
-
-To install the development from GitHub, run:
-``` r
+### Installation
+```r
 devtools::install_github("Sage-Bionetworks/mhealthannotator")
 ```
 Notes on Installation:
 All functionalities in mhealthannotator use reticulate and the [Synapse Python
 client](https://pypi.org/project/synapseclient/). You can set up your environment by having a anaconda environment or a virtual environment set up with Synapseclient. Because mhealthannotator uses reticulate, it is not compatible with the [synapser](https://r-docs.synapse.org/) package..
 
-## How To Run:
-1. Configure Python Environment:
-As we require to use synapse python client, python environment needed to be configured:
-Resources can be found here: 
-- Reticulate: https://rstudio.github.io/reticulate/
-- Renv (Suggested): https://rstudio.github.io/renv/articles/python.html
+### Labelling Files in Synapse Tables
+Mhealthannotator provides functionality to help label Files in Synapse Tables:
 
-2. Build Configuration
-After your python environment is set up, you will be able to parse in your configuration and visualization function.
+- Able to iteratively parse files (any kind) in batches
+- Able to run customized visualization function applied to each Files in Synapse Tables
+- Able to be deployred for crowdsourced data labelling for reliability analysis
 
-- Config Template
-- Function Template
+### References:
 
-Notes: Example configuration can be found in this package inst/* and visualization on R/visualizer.R
+- [How to Use](https://sage-bionetworks.github.io/mhealthannotator/articles/how_to_mhealthannotator.html)
+- [Schema Configuration](https://sage-bionetworks.github.io/mhealthannotator/articles/build_config_schema.html)
+- [Deploying to Shiny Server](https://sage-bionetworks.github.io/mhealthannotator/articles/deploying_mhealthannotator.html)
 
-3. Run Shiny App
-```r
-mhealthannotator::run_app(config = <PATH_TO_CONFIG_FILE>, funs = <PLOT_FUNCTION>)
-```
+### Requesting New Features or Bug Fixes
+For new feature requests or bug fixes, please create an issue to let the maintainers know. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal reprex. If there is agreement that the problem exists or that a new feature is desired, then the issue will be triaged for future development based on priority.
 
-## Deployment:
-
-### a. Shinyapps.io (In-Development)
-
-### b. Shiny Server Pro
-
-[Resources to connect to Sage SciComp Shiny Server Instance](https://sagebionetworks.jira.com/wiki/spaces/SageShinyServer/pages/75497489/Shiny+Server)
-
-1. Git Clone this Repo on your server directory
-```zsh
-git clone https://github.com/Sage-Bionetworks/mhealthannotator.git
-```
-2. Repeat Step 1 and 2 of `How to Run`
-3. Modify app.R based on your parameter of Step 3 of `How to Run`
-
-
+### Contributing
+If you would like to contribute to mhealthannotator, please file an issue so that we can establish a statement of need, avoid redundant work, and track progress on your contribution. Once an issue has been filed and we've identified how to best orient your contribution with package development as a whole, [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the [main repo](https://github.com/Sage-Bionetworks/mhealthannotator), branch off a [feature branch](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow) from `develop`, [commit](http://git-scm.com/docs/git-commit) and [push](http://git-scm.com/docs/git-push) your changes to your fork and submit a [pull request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) for `Sage-Bionetworks/mhealthannotator:develop`.

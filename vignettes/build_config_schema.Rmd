@@ -1,8 +1,8 @@
 ---
-title: "Building Configuration Schema"
+title: "Configuration Schema"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Building Configuration Schema}
+  %\VignetteIndexEntry{Configuration Schema}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,8 +17,20 @@ knitr::opts_chunk$set(
 )
 ```
 
+## App Options Table Schema
+```{r, echo=FALSE}
+app_opts <- tibble::tibble(
+    Key = c("app_url", "team_id"),
+    Value = c("CHARACTER","CHARACTER"),
+    Description = c("App URL for deployment to Shiny Server",
+                    "The team that you require to join for getting access to data"))
+
+knitr::kable(app_opts, format = "pipe")
+```
+
+
 ## Synapse Options Table Schema
-```{r}
+```{r, echo = FALSE}
 synapse_opts <- tibble::tibble(
     Key = c("output_parent_id","synapse_tbl_id",
             "output_filename","filehandle_cols",
@@ -41,7 +53,7 @@ knitr::kable(synapse_opts, format = "pipe")
 
 
 ## Survey Options Table Schema
-```{r}
+```{r, echo = FALSE}
 survey_opts <- tibble::tibble(
     Key = c("colname",
             "type",
@@ -61,7 +73,7 @@ knitr::kable(survey_opts, format = "pipe")
 
 Resizing rendered image will be based on ggplot/rmarkdown style, which is using character parameter for declaring the image pixels, percent to container or automatic (not preferred due to it can be rendered to big in the Shiny App).
 
-```{r}
+```{r, echo = FALSE}
 image_opts <- tibble::tibble(
     Key = c("width", "heigth"),
     Value = c("CHARACTER", "CHARACTER"),

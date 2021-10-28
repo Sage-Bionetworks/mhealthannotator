@@ -1,12 +1,5 @@
-# set config skeleton
-default:
-    funs: NULL
-    synapse_opts: NULL
-    survey_opts: NULL
-    image_opts: NULL
-
 # all buttons and used for testing purposes
-testing:
+default:
     app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
     team_id: '3425336'
     synapse_opts:
