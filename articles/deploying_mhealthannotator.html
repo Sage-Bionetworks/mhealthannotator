@@ -54,13 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/build_config_schema.html">Building Configuration Schema</a>
+      <a href="../articles/build_config_schema.html">Configuration Schema</a>
     </li>
     <li>
       <a href="../articles/deploying_mhealthannotator.html">Deploying mhealthannotator</a>
     </li>
     <li>
-      <a href="../articles/how_to_mhealthannotator.html">Introduction to mhealthannotator</a>
+      <a href="../articles/how_to_mhealthannotator.html">How to use Mhealthannotator</a>
     </li>
   </ul>
 </li>
@@ -120,7 +120,10 @@
 <code>git clone</code> the repository into the folder you’ve created</li>
 <li>If needed, make any changes to the application’s behavior by editing the files, or check out a branch that contains your changes</li>
 <li>Create a .Renviron file with the <a href="https://help.synapse.org/docs/Using-Synapse-as-an-OAuth-Server.2048327904.html#UsingSynapseasanOAuthServer-RegisteringandLinkinganOAuth2.0Client">verified OAuth</a> <code>client_name</code>, <code>client_id</code> and <code>client_secret</code> and restrict permissions (<code>chmod 600 .Renviron</code> or <code>chmod 400 .Renviron</code>)</li>
-<li>To ensure packages are up-to-date, open an R session and run <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code> ```</li>
+<li>To ensure packages are up-to-date, open an R session and run <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code>
+</li>
+<li>Note: Make sure that your Python environment is correctly configured using reticulate with <a href="https://python-docs.synapse.org/build/html/reticulate.html">synapseclient</a>
+</li>
 </ol>
 <p>Again, you may need to run <code>touch restart.txt</code> afterward to ensure the application is restarted.</p>
   </div>
