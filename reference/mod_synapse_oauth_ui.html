@@ -195,23 +195,23 @@ to "main".</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"dccvalidator"</span><span class='op'>)</span>
-<span class='va'>app_ui</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>request</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>mod_synapse_oauth_ui</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"oauth"</span>, request <span class='op'>=</span> <span class='va'>request</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='va'>app_server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>synapse</span> <span class='op'>&lt;-</span> <span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/import.html'>import</a></span><span class='op'>(</span><span class='st'>"synapseclient"</span><span class='op'>)</span>
-  <span class='va'>syn</span> <span class='op'>&lt;-</span> <span class='va'>synapse</span><span class='op'>$</span><span class='fu'>Synapse</span><span class='op'>(</span><span class='op'>)</span>
-  <span class='va'>syn</span> <span class='op'>&lt;-</span> <span class='fu'>mod_synapse_oauth_server</span><span class='op'>(</span>
-    id <span class='op'>=</span> <span class='st'>"oauth"</span>,
-    syn <span class='op'>=</span> <span class='va'>syn</span>
-  <span class='op'>)</span>
-  <span class='fu'>shiny</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/req.html'>req</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span><span class='op'>(</span><span class='va'>syn</span>, <span class='st'>"synapseclient.client.Synapse"</span><span class='op'>)</span>, <span class='fu'><a href='logged_in.html'>logged_in</a></span><span class='op'>(</span><span class='va'>syn</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='fu'><a href='run_app.html'>run_app</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://sage-bionetworks.github.io/dccvalidator'>"dccvalidator"</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>app_ui</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>request</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>mod_synapse_oauth_ui</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"oauth"</span>, request <span class='op'>=</span> <span class='va'>request</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='va'>app_server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>synapse</span> <span class='op'>&lt;-</span> <span class='fu'>reticulate</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reticulate/man/import.html'>import</a></span><span class='op'>(</span><span class='st'>"synapseclient"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>syn</span> <span class='op'>&lt;-</span> <span class='va'>synapse</span><span class='op'>$</span><span class='fu'>Synapse</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>syn</span> <span class='op'>&lt;-</span> <span class='fu'>mod_synapse_oauth_server</span><span class='op'>(</span></span>
+<span class='r-in'>    id <span class='op'>=</span> <span class='st'>"oauth"</span>,</span>
+<span class='r-in'>    syn <span class='op'>=</span> <span class='va'>syn</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>shiny</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/req.html'>req</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>inherits</a></span><span class='op'>(</span><span class='va'>syn</span>, <span class='st'>"synapseclient.client.Synapse"</span><span class='op'>)</span>, <span class='fu'><a href='logged_in.html'>logged_in</a></span><span class='op'>(</span><span class='va'>syn</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='fu'><a href='run_app.html'>run_app</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
