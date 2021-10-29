@@ -1,6 +1,4 @@
-#' credits to DCCValidator
-
-## Try to get Synapse client object
+# Try to get Synapse client object
 attempt_instantiate <- function() {
     if (reticulate::py_module_available("synapseclient")) {
         return(synapseclient$Synapse())

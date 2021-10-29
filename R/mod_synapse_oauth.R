@@ -21,9 +21,8 @@ authorization_url <- NULL
     synapseclient <<- reticulate::import("synapseclient", delay_load = TRUE)
     synapseutils <<- reticulate::import("synapseutils", delay_load = TRUE)
     if (!interactive()) {
-        config_file <- config::get(file = "inst/config.yml")
         setup_global_oauth_vars(
-            app_url = config_file$app_url,
+            app_url =  get_golem_config("app_url"),
             client_name = Sys.getenv("client_name"),
             client_id = Sys.getenv("client_id"),
             client_secret = Sys.getenv("client_secret")
