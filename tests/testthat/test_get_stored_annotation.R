@@ -25,7 +25,7 @@ test_that("get_stored_annotations return all character columns",{
       syn = syn,
       parent_id = "syn26340454",
       uid = c("recordId"),
-      stored_filename = "atediarjo_test_annotations.tsv",
+      stored_filename = "test_annotations.tsv",
       keep_metadata = c("participantId", "createdOn"),
       survey_colnames = c("PGA", "erythema", "induration", "scaling")) %>%
       dplyr::select_if(is.character)
@@ -33,7 +33,7 @@ test_that("get_stored_annotations return all character columns",{
       syn = syn,
       parent_id = "syn26340454",
       uid = c("recordId"),
-      stored_filename = "atediarjo_empty_test_annotations.tsv",
+      stored_filename = "empty_test_annotations.tsv",
       keep_metadata = c("participantId", "createdOn"),
       survey_colnames = c("PGA", "erythema", "induration", "scaling")) %>%
       dplyr::select_if(is.character)
@@ -48,7 +48,7 @@ test_that("get_stored_annotations returns the right row",{
         syn = syn,
         parent_id = "syn26340454",
         uid = c("recordId"),
-        stored_filename = "atediarjo_test_annotations.tsv",
+        stored_filename = "test_annotations.tsv",
         keep_metadata = c("participantId", "createdOn"),
         survey_colnames = c("PGA", "erythema", "induration", "scaling")) %>%
         dplyr::select_if(is.character)
@@ -56,7 +56,7 @@ test_that("get_stored_annotations returns the right row",{
         syn = syn,
         parent_id = "syn26340454",
         uid = c("recordId"),
-        stored_filename = "atediarjo_empty_test_annotations.tsv",
+        stored_filename = "empty_test_annotations.tsv",
         keep_metadata = c("participantId", "createdOn"),
         survey_colnames = c("PGA", "erythema", "induration", "scaling")) %>%
         dplyr::select_if(is.character)
