@@ -20,6 +20,7 @@ cols_for_check <- c("recordId", "participantId",
                     "annotator")
 
 test_that("get_stored_annotations return all character columns",{
+  skip_if_not(logged_in(syn = syn))
   annotated <- mhealthannotator::get_stored_annotation(
       syn = syn,
       parent_id = "syn26340454",
@@ -42,6 +43,7 @@ test_that("get_stored_annotations return all character columns",{
 
 
 test_that("get_stored_annotations returns the right row",{
+    skip_if_not(logged_in(syn = syn))
     annotated <- mhealthannotator::get_stored_annotation(
         syn = syn,
         parent_id = "syn26340454",
