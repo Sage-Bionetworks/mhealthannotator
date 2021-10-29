@@ -82,14 +82,7 @@ test_data_2 <- tibble::tibble(uid = c("record_1", "record_2",
                               fileColumnName = c("dummy_1", "dummy_2", 
                                                  "dummy_3", "dummy_4"))
 
-# test data 3: synapse query table
-tbl <- get_source_table(syn = syn, 
-                        filehandle_cols = ref_list$filehandle_cols,
-                        synapse_tbl_id = ref_list$tbl_id)
 
-tbl_prev <- tbl %>%
-    slice(1:2) %>%
-    dplyr::select(recordId, fileColumnName)
 
 
 #' Test 1: check if get table string filter is giving the right output
@@ -118,15 +111,24 @@ test_that("test get_table_string_filters is outputting the right string format",
 
 #' Test 3: check if able to get annotation session images
 test_that("test get_session_images able to download tables and store in output folder",{
-    create_directories()
+    skip_if_not(logged_in(syn = syn))
+  
+    # test data 3: synapse query table
+    tbl <- get_source_table(syn = syn, 
+                            filehandle_cols = ref_list$filehandle_cols,
+                            synapse_tbl_id = ref_list$tbl_id)
     
-    session_data <- tbl %>% 
-        get_session_images(syn = syn, 
-                           synapse_tbl_id = ref_list$tbl_id, 
-                           filehandle_cols = ref_list$filehandle_cols,
-                           uid = ref_list$uid, 
-                           n_batch = ref_list$n_batch, 
-                           cache_location = ref_list$cache_location)
+    tbl_prev <- tbl %>%
+      slice(1:2) %>%
+      dplyr::select(recordId, fileColumnName)
+      create_directories()
+      session_data <- tbl %>% 
+          get_session_images(syn = syn, 
+                             synapse_tbl_id = ref_list$tbl_id, 
+                             filehandle_cols = ref_list$filehandle_cols,
+                             uid = ref_list$uid, 
+                             n_batch = ref_list$n_batch, 
+                             cache_location = ref_list$cache_location)
     
     # test if returns dataframe
     expect_true(inherits(session_data, 
@@ -158,7 +160,18 @@ test_that("visualize_column_files returns desired filepath output", {
 
 #' Test 5: check if able to get annotation session images
 test_that("test get_annotation_batch to annotation app data placeholder",{
+    skip_if_not(logged_in(syn = syn))
     create_directories()
+  
+    # test data 3: synapse query table
+    tbl <- get_source_table(syn = syn, 
+                            filehandle_cols = ref_list$filehandle_cols,
+                            synapse_tbl_id = ref_list$tbl_id)
+    
+    tbl_prev <- tbl %>%
+      slice(1:2) %>%
+      dplyr::select(recordId, fileColumnName)
+    
     data <- get_annotation_batch(syn,
                          all_data = tbl,
                          curated_data= tbl_prev,

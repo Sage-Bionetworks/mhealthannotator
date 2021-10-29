@@ -69,12 +69,12 @@ validate_survey_config <- function(config){
 validate_config_file <- function(config_path){
     result <- tryCatch({
         config <- config::get(file = config_path)
-        app_url <- expect_true(!is.null(config$app_url))
-        team_id <- expect_true(!is.null(config$team_id))
-        synapse_opts <- expect_true(inherits(
-            validate_synapse_config(config$synapse_opts), "list"))
-        survey_opts <- expect_true(inherits(
-            validate_survey_config(config$survey_opts), "list"))
+        app_url <- !is.null(config$app_url)
+        team_id <- !is.null(config$team_id)
+        synapse_opts <- inherits(
+            validate_synapse_config(config$synapse_opts), "list")
+        survey_opts <- inherits(
+            validate_survey_config(config$survey_opts), "list")
         all(c(app_url, team_id, synapse_opts, survey_opts))  
     }, error = function(e){
         e$message
