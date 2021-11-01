@@ -2,7 +2,9 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Sage-Bionetworks/mhealthannotator/workflows/R-CMD-check/badge.svg)](https://github.com/Sage-Bionetworks/mhealthannotator/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
+
 
 Mhealthannotator is an RShiny Package used for creating dashboard as a service that can easily visualize Files in Synapse Tables. The goal of this app is to let users be able to easily deploy apps for annotating/labelling data to collaborators more seamlessly. It's used in the mPower and Psorcast project to help create labelled data for analysis and validation to our unlabelled digital health datasets.
 
