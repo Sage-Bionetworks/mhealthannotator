@@ -71,7 +71,7 @@ testing:
 
 # all buttons and used for testing purposes
 psorcast_plaque:
-    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-psorcast-plaque-imaging/'
     team_id: '3425336'
     synapse_opts:
         output_parent_id: 
