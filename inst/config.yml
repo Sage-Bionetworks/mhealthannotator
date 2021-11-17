@@ -1,5 +1,11 @@
-# all buttons and used for testing purposes
 default:
+    app_url: NULL
+    team_id: NULL
+    synapse_opts: NULL
+    survey_opts: NULL
+
+# all buttons and used for testing purposes
+testing:
     app_url: 'https://shinypro.synapse.org/users/atediarjo/mhealthannotator-oauth/'
     team_id: '3425336'
     synapse_opts:
@@ -166,7 +172,7 @@ psorcast_fitzpatrick:
         output_parent_id: 
             - "syn26433378"
         synapse_tbl_id: 
-            - "syn22281748" 
+            - "syn22281749" 
         output_filename: 
             - "handImaging_fitzpatrick_scale.tsv"
         filehandle_cols:
