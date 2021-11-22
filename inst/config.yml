@@ -193,22 +193,9 @@ psorcast_fitzpatrick:
             - "recordId" # optional
     survey_opts:
         survey_1:
-                colname: "left_hand_fitzpatrick_score"
+                colname: "fitzpatrick_score"
                 type: "radio"
-                prompt: "Rate Left Hand Fitzpatrick Score:"
-                input_choices:
-                    0: 0
-                    1: 1
-                    2: 2
-                    3: 3
-                    4: 4
-                    5: 5
-                    6: 6
-                    Can't Tell: "Can't Tell"
-        survey_2:
-                colname: "right_hand_fitzpatrick_score"
-                type: "radio"
-                prompt: "Rate Right Hand Fitzpatrick Score:"
+                prompt: "Rate Hand Fitzpatrick Score:"
                 input_choices:
                     0: 0
                     1: 1
