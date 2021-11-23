@@ -148,7 +148,7 @@ psorcast_nail:
         output_parent_id: 
             - "syn26133849"
         synapse_tbl_id: 
-            - "syn26159187" 
+            - "syn26050060" 
         output_filename: 
             - "nail_psoriasis_annotations.tsv"
         filehandle_cols:
@@ -168,7 +168,8 @@ psorcast_nail:
                 input_choices:
                     Yes: 'TRUE'
                     No: 'FALSE'
-                    Can't Tell: "Can't Tell"
+                    Unsure: 'Unsure'
+                    Can't Tell (Image Quality): "Can't Tell"
 
 # all buttons and used for testing purposes
 psorcast_fitzpatrick:
@@ -197,7 +198,6 @@ psorcast_fitzpatrick:
                 type: "radio"
                 prompt: "Rate Hand Fitzpatrick Score:"
                 input_choices:
-                    0: 0
                     1: 1
                     2: 2
                     3: 3
