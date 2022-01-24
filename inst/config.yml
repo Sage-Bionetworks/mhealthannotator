@@ -208,3 +208,43 @@ psorcast_fitzpatrick:
     image_opts:
         width: "97%"
         height: "97%"
+# all buttons and used for testing purposes
+mpower_gait:
+    app_url: 'https://shinypro.synapse.org/users/atediarjo/mpower-gait/'
+    team_id: '3345548'
+    synapse_opts:
+        output_parent_id: 
+            - "syn26340454"
+        synapse_tbl_id: 
+            - "syn12514611" 
+        output_filename: 
+            - "mpower_gait_score.tsv"
+        filehandle_cols:
+            - "walk_motion.json"
+            - "balance_motion.json"
+        uid: 
+            - "recordId" # unique identifier for that file in synapse table
+        n_batch: 10
+        keep_metadata:
+            - "healthCode"
+            - "createdOn"
+        sort_keys:
+            - "recordId" # optional
+    survey_opts:
+        - colname: "Is this person walking?"
+          type: "radio"
+          prompt: "Rate Hand Fitzpatrick Score:"
+          input_choices:
+            Yes: "Yes"
+            No: "No"
+            Can't Tell: "Can't Tell"
+        - colname: "Rate the walking?"
+          type: "radio"
+          prompt: "Rate Hand Fitzpatrick Score:"
+          input_choices:
+            - "Walking"
+            - "Partially Walking"
+            - "Resting"
+    image_opts:
+        width: "97%"
+        height: "97%"
