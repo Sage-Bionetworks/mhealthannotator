@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mhealthannotator</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -57,7 +53,13 @@
       <a href="articles/build_config_schema.html">Configuration Schema</a>
     </li>
     <li>
+      <a href="articles/build_mpower_config.html">Usage in mPower Guidelines</a>
+    </li>
+    <li>
       <a href="articles/deploying_mhealthannotator.html">Deploying mhealthannotator</a>
+    </li>
+    <li>
+      <a href="articles/extending_mhealthannotator.html">Extending mHealthannotator</a>
     </li>
     <li>
       <a href="articles/how_to_mhealthannotator.html">How to use Mhealthannotator</a>
@@ -70,7 +72,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Sage-Bionetworks/mhealthannotator/">
+  <a href="https://github.com/Sage-Bionetworks/mhealthannotator/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -87,22 +89,22 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="mhealthannotator" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mhealthannotator" class="anchor"></a>mhealthannotator</h2>
+<div class="section level2">
+<h2 id="mhealthannotator">mhealthannotator<a class="anchor" aria-label="anchor" href="#mhealthannotator"></a>
+</h2>
 <!-- badges: start -->
 
 <p>Mhealthannotator is an RShiny Package used for creating dashboard as a service that can easily visualize Files in Synapse Tables. The goal of this app is to let users be able to easily deploy apps for annotating/labelling data to collaborators more seamlessly. It’s used in the mPower and Psorcast project to help create labelled data for analysis and validation to our unlabelled digital health datasets.</p>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Sage-Bionetworks/mhealthannotator"</span><span class="op">)</span></code></pre></div>
-<p>Notes on Installation: All functionalities in mhealthannotator use reticulate and the <a href="https://pypi.org/project/synapseclient/">Synapse Python client</a>. You can set up your environment by having a anaconda environment or a virtual environment set up with Synapseclient. Because mhealthannotator uses reticulate, it is not compatible with the <a href="https://r-docs.synapse.org/">synapser</a> package..</p>
+<p>Notes on Installation: All functionalities in mhealthannotator use reticulate and the <a href="https://pypi.org/project/synapseclient/" class="external-link">Synapse Python client</a>. You can set up your environment by having a anaconda environment or a virtual environment set up with Synapseclient. Because mhealthannotator uses reticulate, it is not compatible with the <a href="https://r-docs.synapse.org/" class="external-link">synapser</a> package..</p>
 </div>
-<div id="labelling-files-in-synapse-tables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#labelling-files-in-synapse-tables" class="anchor"></a>Labelling Files in Synapse Tables</h3>
+<div class="section level3">
+<h3 id="labelling-files-in-synapse-tables">Labelling Files in Synapse Tables<a class="anchor" aria-label="anchor" href="#labelling-files-in-synapse-tables"></a>
+</h3>
 <p>Mhealthannotator provides functionality to help label Files in Synapse Tables:</p>
 <ul>
 <li>Able to iteratively parse files (any kind) in batches</li>
@@ -110,69 +112,80 @@
 <li>Able to be deployred for crowdsourced data labelling for reliability analysis</li>
 </ul>
 </div>
-<div id="references" class="section level3">
-<h3 class="hasAnchor">
-<a href="#references" class="anchor"></a>References:</h3>
+<div class="section level3">
+<h3 id="references">References:<a class="anchor" aria-label="anchor" href="#references"></a>
+</h3>
 <ul>
-<li><a href="https://sage-bionetworks.github.io/mhealthannotator/articles/how_to_mhealthannotator.html">How to Use</a></li>
-<li><a href="https://sage-bionetworks.github.io/mhealthannotator/articles/build_config_schema.html">Schema Configuration</a></li>
-<li><a href="https://sage-bionetworks.github.io/mhealthannotator/articles/deploying_mhealthannotator.html">Deploying to Shiny Server</a></li>
+<li><a href="https://sage-bionetworks.github.io/mhealthannotator/articles/how_to_mhealthannotator.html" class="external-link">How to Use</a></li>
+<li><a href="https://sage-bionetworks.github.io/mhealthannotator/articles/build_config_schema.html" class="external-link">Schema Configuration</a></li>
+<li><a href="https://sage-bionetworks.github.io/mhealthannotator/articles/deploying_mhealthannotator.html" class="external-link">Deploying to Shiny Server</a></li>
 </ul>
 </div>
-<div id="requesting-new-features-or-bug-fixes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#requesting-new-features-or-bug-fixes" class="anchor"></a>Requesting New Features or Bug Fixes</h3>
+<div class="section level3">
+<h3 id="requesting-new-features-or-bug-fixes">Requesting New Features or Bug Fixes<a class="anchor" aria-label="anchor" href="#requesting-new-features-or-bug-fixes"></a>
+</h3>
 <p>For new feature requests or bug fixes, please create an issue to let the maintainers know. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal reprex. If there is agreement that the problem exists or that a new feature is desired, then the issue will be triaged for future development based on priority.</p>
 </div>
-<div id="contributing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h3>
-<p>If you would like to contribute to mhealthannotator, please file an issue so that we can establish a statement of need, avoid redundant work, and track progress on your contribution. Once an issue has been filed and we’ve identified how to best orient your contribution with package development as a whole, <a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">fork</a> the <a href="https://github.com/Sage-Bionetworks/mhealthannotator">main repo</a>, branch off a <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow">feature branch</a> from <code>develop</code>, <a href="http://git-scm.com/docs/git-commit">commit</a> and <a href="http://git-scm.com/docs/git-push">push</a> your changes to your fork and submit a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">pull request</a> for <code>Sage-Bionetworks/mhealthannotator:develop</code>.</p>
+<div class="section level3">
+<h3 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h3>
+<p>If you would like to contribute to mhealthannotator, please file an issue so that we can establish a statement of need, avoid redundant work, and track progress on your contribution. Once an issue has been filed and we’ve identified how to best orient your contribution with package development as a whole, <a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo" class="external-link">fork</a> the <a href="https://github.com/Sage-Bionetworks/mhealthannotator" class="external-link">main repo</a>, branch off a <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow" class="external-link">feature branch</a> from <code>develop</code>, <a href="http://git-scm.com/docs/git-commit" class="external-link">commit</a> and <a href="http://git-scm.com/docs/git-push" class="external-link">push</a> your changes to your fork and submit a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request" class="external-link">pull request</a> for <code>Sage-Bionetworks/mhealthannotator:develop</code>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/Sage-Bionetworks/mhealthannotator/">https://​github.com/​Sage-Bionetworks/​mhealthannotator/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Sage-Bionetworks/mhealthannotator/issues">https://​github.com/​Sage-Bionetworks/​mhealthannotator/​issues</a>
-</li>
+<li><a href="https://github.com/Sage-Bionetworks/mhealthannotator/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Sage-Bionetworks/mhealthannotator/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing mhealthannotator</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Aryton Tediarjo <br><small class="roles"> Maintainer, author </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/Sage-Bionetworks/mhealthannotator/actions"><img src="https://github.com/Sage-Bionetworks/mhealthannotator/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a></li>
+<li><a href="https://github.com/Sage-Bionetworks/mhealthannotator/actions" class="external-link"><img src="https://github.com/Sage-Bionetworks/mhealthannotator/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Aryton Tediarjo.</p>
+  <p></p>
+<p>Developed by Aryton Tediarjo.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -180,6 +193,8 @@
 
   
 
+
+  
 
   </body>
 </html>
