@@ -1,0 +1,38 @@
+---
+title: "Extending mHealthannotator"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Extending mHealthannotator}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Guidelines to Extending mHealthAnnotator
+Here are components that you need to know for contributing/extending functionality of this package:
+
+For every new contribution, make sure to test the package build:
+```{r eval=FALSE}
+devtools::check()
+```
+
+## Adding Visualization Function:
+- To integrate your visualization function, please create a PR [R/visualizer.R](https://github.com/Sage-Bionetworks/mhealthannotator/blob/main/R/visualizer.R) and our maintainers will be reviewing the PR
+
+- Note: A general visualization function that we accept is those that accepts an input filename (e.g Synapse Table File Columns) and outputs an output result (png, jpeg etc.) of the desired visualization
+
+## Adding more Shiny-App Configuration:
+- PR to [config.yml](https://github.com/Sage-Bionetworks/mhealthannotator/blob/main/inst/config.yaml) to add new configuration
+
+## Adding New UI Input Functionality:
+To add new UI for input, there are two scripts that you need to modify and append, namely:
+
+
+1. [UI Module](https://github.com/Sage-Bionetworks/mhealthannotator/blob/main/R/mod_survey_input_user.R): For every new UI functionality, you will need to append new buttonType to the UI (need to be in scope with RShiny).
+
+
+2. [Input Updater](https://github.com/Sage-Bionetworks/mhealthannotator/blob/main/R/update_inputs.R): Same goes here, need to append new buttonType and update the UI for each prev/next images iteration.
+
+You can find resources on what is able to be added in the (RShiny Function Reference)[https://shiny.rstudio.com/reference/shiny/1.6.0/] (Section UI Inputs)
+
+## Miscellaneous:
+For other miscellaneous updates that is not within this documentation scope, please refer to the maintainer in the package description :) 

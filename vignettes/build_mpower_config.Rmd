@@ -1,0 +1,25 @@
+---
+title: "Usage in mPower Guidelines"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usage in mPower Guidelines}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## About
+This section will cover guidelines in how you can use mHealthAnnotator in mPower data.
+
+## Guidelines
+This package currently have built-in functions to run mPower visualization function on sensor data (specifically visualizing rotation, acceleration and gravity). Here are steps to using it:
+
+Change parameter in `app.R`
+```{r eval=FALSE}
+Sys.setenv(R_CONFIG_ACTIVE = "mpower_gait")
+pkgload::load_all()
+mhealthannotator::run_app(
+    funs = mhealthannotator::visualize_mpower_v2_sensor,
+    config = "inst/config.yml") # add parameters here (if any)
+```
+Notice that 2 things have been changed, the config endpoint and which function you chose as the `funs` parameter.
+
