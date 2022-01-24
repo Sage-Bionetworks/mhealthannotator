@@ -80,7 +80,8 @@ update_inputs <- function(id,
                                        select_view_ns(colname), 
                                        selected = parse_select_value(
                                            row_input, selected = selected))
-        }
+        } 
+        # add more conditions for UI update here #
     })
     return(values)
 }
