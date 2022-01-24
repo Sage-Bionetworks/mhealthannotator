@@ -67,6 +67,7 @@ mod_survey_input_user_ui <- function(id){
             choices = choices,
             checkIcon = list(
               yes = icon("ok", lib = "glyphicon")))
+        # you can add more button here using RShiny UI Function #  
         }else{
           stop("Please parse in button UI")
         }
