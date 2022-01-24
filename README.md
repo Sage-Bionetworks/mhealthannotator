@@ -25,6 +25,8 @@ Mhealthannotator provides functionality to help label Files in Synapse Tables:
 
 ### References:
 
+This package uses [Github Pages](https://sage-bionetworks.github.io/mhealthannotator/) as Documentation.
+
 - [How to Use](https://sage-bionetworks.github.io/mhealthannotator/articles/how_to_mhealthannotator.html)
 - [Schema Configuration](https://sage-bionetworks.github.io/mhealthannotator/articles/build_config_schema.html)
 - [Deploying to Shiny Server](https://sage-bionetworks.github.io/mhealthannotator/articles/deploying_mhealthannotator.html)
